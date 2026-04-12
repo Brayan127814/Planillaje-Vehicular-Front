@@ -1,0 +1,51 @@
+<div class="container">
+
+  <!-- LADO IZQUIERDO -->
+  <div class="left-panel">
+    <div class="overlay">
+      <p class="tag">SYSTEM INITIALIZE</p>
+      <h1>Architecting the future of precision engineering.</h1>
+
+      <div class="card-info">
+        <strong>Technical Precision</strong>
+        <p>Standardized deployment protocols.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LADO DERECHO -->
+  <div class="right-panel">
+    <div class="form-container">
+
+      <p class="step">STEP 1 OF 3</p>
+      <h2>Begin your technical journey.</h2>
+      <p class="subtitle">
+        Enter your credentials to initialize your workspace.
+      </p>
+
+      <form [formGroup]="formsRegistro" (ngSubmit)="registrar()">
+
+        <label>FULL NAME</label>
+        <input type="text" placeholder="John Doe" formControlName="nombre" />
+
+        <label>USERNAME</label>
+        <input type="text" placeholder="@j.doe_arch" formControlName="username" />
+
+        <label>SECURITY PASSWORD</label>
+        <input type="password" placeholder="********" formControlName="password" />
+
+        <button type="submit">Continue Setup →</button>
+
+      </form>
+
+      <!-- DEBUG -->
+      <p class="debug">Token recibido: {{ token }}</p>
+
+      <!-- MENSAJES -->
+      <p *ngIf="mensajeExit" class="success">{{ mensajeExit }}</p>
+      <p *ngIf="errorMensaje" class="error">{{ errorMensaje }}</p>
+
+    </div>
+  </div>
+
+</div>

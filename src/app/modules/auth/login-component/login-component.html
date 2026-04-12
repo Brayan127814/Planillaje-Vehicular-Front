@@ -1,0 +1,52 @@
+<div class="container">
+
+  <!-- PANEL IZQUIERDO (igual que registro) -->
+  <div class="left-panel">
+    <div class="overlay">
+      <p class="tag">SYSTEM ACCESS</p>
+      <h1>Secure access to surveillance operations.</h1>
+
+      <div class="card-info">
+        <strong>Sentient Shield</strong>
+        <p>Advanced monitoring & control system.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL DERECHO -->
+  <div class="right-panel">
+    <div class="form-container">
+
+      <p class="step">LOGIN</p>
+      <h2>Bienvenido</h2>
+      <p class="subtitle">Accede al sistema de vigilancia</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="loginSesion()" class="login-form">
+
+        <label>USUARIO</label>
+        <input type="text" formControlName="username" placeholder="Nombre de usuario"
+          [class.invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+
+        <label>CONTRASEÑA</label>
+        <input type="password" formControlName="password" placeholder="••••••••"
+          [class.invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+
+        <div class="forgot-password">
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" [disabled]="loginForm.pending">
+          Iniciar Sesión →
+        </button>
+
+      </form>
+
+      <div class="footer-links">
+        <span>¿No tienes una cuenta? </span>
+        <a routerLink="/registrate" class="request-access">Crear cuenta</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>

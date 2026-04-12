@@ -1,0 +1,72 @@
+<aside class="cyber-sidebar open" [class.open]="isOpen">
+  <div class="sidebar-header">
+    <span class="logo-text">Cyber-Management</span>
+    <button class="menu-toggle">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+
+    <!-- SOLO ADMIN -->
+    <a *ngIf="authService.hasRole('ROLE_ADMIN')" routerLink="crear-invitacion" routerLinkActive="active"
+      class="nav-item">
+      <span class="material-symbols-outlined">assignment_add</span>
+      <span class="nav-label">Crear Invitación</span>
+    </a>
+
+    <a *ngIf="authService.hasRole('ROLE_ADMIN')" routerLink="crear-puesto" routerLinkActive="active" class="nav-item">
+      <span class="material-symbols-outlined">assignment_add</span>
+      <span class="nav-label">Registrar puesto</span>
+    </a>
+
+    <!-- RECORREDOR / ADMIN -->
+    <a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')"
+      routerLink="/dashboard/planillaje" routerLinkActive="active" class="nav-item">
+      <span class="material-symbols-outlined">assignment_add</span>
+      <span class="nav-label">Registrar Planillaje</span>
+    </a>
+
+    <a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')"
+      routerLink="conssultar-planillaje" routerLinkActive="active" class="nav-item">
+      <span class="material-symbols-outlined">inventory</span>
+      <span class="nav-label">Consultar Planilla</span>
+    </a>
+
+    <a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')"
+      routerLink="registrar-vehiculo" routerLinkActive="active" class="nav-item">
+      <span class="material-symbols-outlined">directions_car</span>
+      <span class="nav-label">Registrar Vehículo</span>
+    </a>
+
+    <a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')" routerLink="vehiculos"
+      routerLinkActive="active" class="nav-item">
+      <span class="material-symbols-outlined">search</span>
+      <span class="nav-label">Consultar Vehículo</span>
+    </a>
+
+    <a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')" routerLink="parqueaderos"
+      routerLinkActive="active" class="nav-item">
+      <span class="material-symbols-outlined">local_parking</span>
+      <span class="nav-label">Parqueaderos</span>
+    </a>
+
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-card">
+      <div class="avatar">
+        <span class="material-symbols-outlined">person</span>
+      </div>
+      <div class="user-info">
+        <p class="user-name">{{ authService.getUserName() }}</p>
+        <p class="user-role">{{ authService.getUserRoleLabel() }}</p>
+      </div>
+    </div>
+
+    <button class="btn-logout">
+      <span class="material-symbols-outlined">logout</span>
+      <span>Cerrar Sesión</span>
+    </button>
+  </div>
+</aside>

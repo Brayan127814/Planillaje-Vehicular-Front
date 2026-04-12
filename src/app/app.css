@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@800&display=swap');
+
+:root {
+  --surface: #f7f9fb;
+  --primary: #091426;
+  --secondary: #4648d4;
+  --text-main: #191c1e;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--surface);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+}
+
+/* Para que los iconos de Material se vean consistentes */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

@@ -1,0 +1,97 @@
+<div class="dashboard-container">
+  
+  <header class="dashboard-header">
+    <h1>Gestión de Parqueaderos</h1>
+  </header>
+
+  <div class="stats-grid">
+    <div class="stat-card free">
+      <div class="stat-icon">🔓</div>
+      <div class="stat-info">
+        <span class="stat-label">Total Libres</span>
+        <span class="stat-value">{{ totalLibres }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card busy">
+      <div class="stat-icon">🚗</div>
+      <div class="stat-info">
+        <span class="stat-label">Total Ocupados</span>
+        <span class="stat-value">{{ totalOcupados }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="parqueaderosLibres | async as data; else loadingLibres">
+    <div class="card-header">
+      <h3><i class="icon-free"></i> Parqueaderos Libres</h3>
+    </div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Estado</th>
+            <th>Puesto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of data.content">
+            <td data-label="Número">{{ p.numeroParqueadero }}</td>
+            <td data-label="Estado"><span class="badge badge-free">{{ p.estado }}</span></td>
+            <td data-label="Puesto">{{ p.nombrePuesto }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <button (click)="anteriorLibres()" [disabled]="paginaLibres === 0">Anterior</button>
+      <span class="page-info">Página {{ paginaLibres + 1 }} de {{ totalPageLibres }}</span>
+      <button (click)="siguienteLibres()" [disabled]="paginaLibres >= totalPageLibres - 1">Siguiente</button>
+    </div>
+  </div>
+
+  <ng-template #loadingLibres>
+    <div class="loading-state">Cargando parqueaderos libres...</div>
+  </ng-template>
+
+  <hr class="separator">
+
+  <div class="card" *ngIf="parqueaderosOcupados | async as ocupados; else loadingOcupados">
+    <div class="card-header">
+      <h3><i class="icon-busy"></i> Parqueaderos Ocupados</h3>
+    </div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Estado</th>
+            <th>Puesto</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of ocupados.content">
+            <td data-label="Número">{{ p.numeroParqueadero }}</td>
+            <td data-label="Estado"><span class="badge badge-busy">{{ p.estado }}</span></td>
+            <td data-label="Puesto">{{ p.nombrePuesto }}</td>
+            <td data-label="Acciones">
+              <button class="btn-action" (click)="liberar(p.id)">Liberar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <button (click)="anteriorOcupados()" [disabled]="paginaOcupados === 0">Anterior</button>
+      <span class="page-info">Página {{ paginaOcupados + 1 }} de {{ totalPageOcupados }}</span>
+      <button (click)="siguienteOcupados()" [disabled]="paginaOcupados >= totalPageOcupados - 1">Siguiente</button>
+    </div>
+  </div>
+
+  <ng-template #loadingOcupados>
+    <div class="loading-state">Cargando parqueaderos ocupados...</div>
+  </ng-template>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="dashboard-wrapper">
+    <!-- overlay -->
+  <div 
+    class="overlay" 
+    *ngIf="isSidebarOpen"
+    (click)="toggleSidebar()">
+  </div>
+
+    <app-aside-component [isOpen]="isSidebarOpen"></app-aside-component>
+
+
+    <div class="main-container">
+        <app-header-compnent (toggleSidebar)="toggleSidebar()"></app-header-compnent>
+
+        <main class="content-body">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>

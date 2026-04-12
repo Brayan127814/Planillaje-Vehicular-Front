@@ -1,0 +1,342 @@
+/* CONTENEDOR PRINCIPAL */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 30px;
+}
+
+/* FORM */
+.form-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.form-card h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+/* FORM STRUCTURE */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row {
+  display: flex;
+  gap: 15px;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 11px;
+  font-weight: bold;
+  color: gray;
+  margin-bottom: 5px;
+}
+
+.field input,
+.field select {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #f1f1f1;
+  outline: none;
+}
+
+/* BOTÓN */
+.btn {
+  margin-top: 10px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #091426, #4648d4);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* PANEL DERECHO */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  background: #e6fff1;
+  color: green;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+/* LISTA */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid #eee;
+}
+
+.card:hover {
+  background: #f9f9f9;
+  transform: translateX(3px);
+}
+
+/* INFO */
+.card-info h4 {
+  margin: 0;
+}
+
+.card-info p {
+  margin: 0;
+  font-size: 12px;
+  color: gray;
+}
+
+/* ESTADO */
+.status {
+  font-size: 12px;
+  font-weight: bold;
+  color: green;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+}
+.success-alert {
+    /* Layout y Posicionamiento */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    
+    /* Colores y Bordes */
+    background-color: #ecfdf5; /* Verde muy claro */
+    color: #065f46;            /* Verde esmeralda oscuro */
+    border: 1px solid #a7f3d0;
+    border-radius: 10px;
+    border-left: 5px solid #10b981; /* Acento lateral */
+    
+    /* Tipografía */
+    font-size: 0.95rem;
+    font-weight: 500;
+    
+    /* Sombra suave */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    
+    /* Animación de entrada */
+    animation: alertSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Estilo para el icono de Material Symbols */
+.success-alert .material-symbols-outlined {
+    font-size: 22px;
+    color: #10b981;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Animación: Deslizar desde arriba y aparecer */
+@keyframes alertSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    margin-top: 1rem;
+    border-top: 1px solid #f1f3f5; /* Una línea sutil para separar de la lista */
+}
+
+/* Estilo base de los botones */
+.pagination button {
+    background-color: #ffffff;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Efecto al pasar el mouse */
+.pagination button:hover:not(:disabled) {
+    background-color: #f8fafc;
+    border-color: #cbd5e0;
+    color: #2d3748;
+    transform: translateY(-1px);
+}
+
+/* Estado presionado */
+.pagination button:active:not(:disabled) {
+    transform: translateY(0);
+    background-color: #edf2f7;
+}
+
+/* Estado Deshabilitado (Crucial para la lógica) */
+.pagination button:disabled {
+    background-color: #f7fafc;
+    color: #a0aec0;
+    border-color: #edf2f7;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Estilo del texto "Página X de Y" */
+.pagination span {
+    font-size: 0.9rem;
+    color: #718096;
+    font-weight: 500;
+    min-width: 100px; /* Evita que el layout salte al cambiar de número */
+    text-align: center;
+}
+
+.error-alert {
+  margin-top: 10px;
+  padding: 10px;
+  background: #ffe5e5;
+  color: #b30000;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+/* 🔥 FORM HORIZONTAL */
+.form-horizontal {
+  width: 100%;
+}
+
+/* FILA PRINCIPAL */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr auto;
+  gap: 15px;
+  align-items: end;
+}
+
+/* CAMPOS */
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 5px;
+}
+
+.field input,
+.field select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+/* FOCUS PRO */
+.field input:focus,
+.field select:focus {
+  border-color: #4f46e5;
+  background: white;
+  box-shadow: 0 0 0 2px rgba(79,70,229,0.1);
+}
+
+/* SELECT MÁS GRANDE */
+.select-field {
+  min-width: 200px;
+}
+
+/* BOTÓN */
+.action {
+  display: flex;
+  align-items: flex-end;
+}
+
+.action .btn {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 8px;
+}
+
+/* 🔥 RESPONSIVE */
+@media (max-width: 900px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .action {
+    width: 100%;
+  }
+
+  .action .btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,27 @@
+<div class="contenedor-invitacion">
+  <h2>Generar Invitación</h2>
+
+  <div class="campo">
+    <label>Seleccionar Puesto</label>
+    <select [(ngModel)]="puestoSeleccionado" [disabled]="cargandoPuestos">
+      <option value="" disabled>Seleccione un puesto</option>
+      <option *ngFor="let p of puestos" [value]="p.id">
+        {{ p.nombrePuesto }}
+      </option>
+    </select>
+    <span *ngIf="cargandoPuestos" class="cargando">Cargando puestos...</span>
+  </div>
+
+  <button class="btn-generar" (click)="crearInvitacion()" [disabled]="cargandoPuestos">
+    Generar Invitación
+  </button>
+
+  <!-- TOKEN -->
+  <div *ngIf="tokenGenerado$ | async as token" class="token-box">
+    <p class="token-label">Token generado:</p>
+    <p class="token">{{ token }}</p>
+    <button class="btn-copiar" (click)="copiarToken(token)">
+      Copiar Token
+    </button>
+  </div>
+</div>

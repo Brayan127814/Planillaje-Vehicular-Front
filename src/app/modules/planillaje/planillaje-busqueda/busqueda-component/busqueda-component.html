@@ -1,0 +1,77 @@
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h1>Planillaje Vehicular</h1>
+      <p>Consulta por placa</p>
+    </div>
+
+    <div class="busqueda">
+      <input
+        type="text"
+        [(ngModel)]="placaActual"
+        (input)="placaActual = placaActual.toUpperCase().trim()"
+        placeholder="Buscar placa..."
+        (keyup.enter)="buscar()"
+      />
+
+      <button (click)="buscar()" [disabled]="loading">
+        {{ loading ? 'Buscando...' : 'Buscar' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="loading" class="loading">
+    Cargando...
+  </div>
+
+  <!-- MENSAJE -->
+  <div *ngIf="!loading && mensaje" class="mensaje">
+    {{ mensaje }}
+  </div>
+
+  <!-- TABLA -->
+  <div class="tabla"*ngIf="!loading && planillajes.length > 0">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Placa</th>
+          <th>Vehículo</th>
+          <th>Novedad</th>
+          <th>Parqueadero</th>
+          <th>Hora</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let p of planillajes; trackBy: trackById">
+          <td>{{ p.placa }}</td>
+          <td>{{ p.vehiculo }}</td>
+          <td>{{ p.novedadesPlanillaje }}</td>
+          <td>{{ p.parqueadero }}</td>
+          <td>{{ p.horaInicio | date:'short' }}</td>  <!-- Pipe de fecha nativo -->
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- PAGINACIÓN -->
+  <div class="paginacion" *ngIf="!loading && planillajes.length > 0">
+
+    <button (click)="anterior()" [disabled]="page === 0 || loading">
+      Anterior
+    </button>
+
+    <span>Página {{ page + 1 }}</span>
+
+    <button (click)="siguiente()" [disabled]="page >= totalPages - 1 || loading">
+      Siguiente
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,33 @@
+.dashboard-wrapper {
+  display: flex;
+  height: 100vh;          /* 🔥 clave */
+  overflow: hidden;       /* evita scroll global */
+}
+
+/* SIDEBAR ya tiene height: 100vh (bien) */
+
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;          /* 🔥 importante */
+}
+
+/* HEADER ocupa su espacio natural */
+app-header-compnent {
+  flex-shrink: 0;
+}
+
+/* CONTENIDO */
+.content-body {
+  flex: 1;
+  overflow-y: auto;       /* 🔥 scroll SOLO aquí */
+  padding: 20px;
+  background: #f9fafb;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 900;
+}

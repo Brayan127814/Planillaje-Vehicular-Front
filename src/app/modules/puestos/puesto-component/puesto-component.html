@@ -1,0 +1,60 @@
+<div class="contenedor-doble">
+
+  <!-- IZQUIERDA -->
+  <div class="panel">
+    <h2>Registrar Nuevo Puesto</h2>
+
+    <p *ngIf="mensajeExit" class="mensaje-exito">{{ mensajeExit }}</p>
+    <p *ngIf="errorMensaje" class="mensaje-error">{{ errorMensaje }}</p>
+
+    <form [formGroup]="formsPuestos" (ngSubmit)="registrarPuesto()">
+
+      <div class="campo">
+        <label>Nombre del Puesto</label>
+        <input type="text" formControlName="nombrePuesto">
+      </div>
+
+      <div class="campo">
+        <label>Dirección</label>
+        <input type="text" formControlName="direccion">
+      </div>
+
+      <div class="campo">
+        <label>Total de Parqueaderos</label>
+        <input type="number" formControlName="totalParqueaderos">
+      </div>
+
+      <button type="submit" [disabled]="formsPuestos.invalid">
+        Guardar Puesto
+      </button>
+
+    </form>
+  </div>
+
+  <!-- DERECHA -->
+  <div class="panel">
+    <h2>Crear Parqueaderos</h2>
+
+    <!-- Mensajes para parqueaderos -->
+    <p *ngIf="mensajeExitParqueaderos" class="mensaje-exito">{{ mensajeExitParqueaderos }}</p>
+    <p *ngIf="errorMensajeParqueaderos" class="mensaje-error">{{ errorMensajeParqueaderos }}</p>
+
+    <div class="campo">
+      <label>Seleccionar Puesto</label>
+      <select [(ngModel)]="puestoSeleccionado">
+        <option value="">Seleccione un puesto</option>
+        <option *ngFor="let p of puestos" [value]="p.id">
+          {{ p.nombrePuesto }}
+        </option>
+      </select>
+    </div>
+
+    <button 
+      [disabled]="!puestoSeleccionado"
+      (click)="crearParqueaderos()">
+      Generar Parqueaderos
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,150 @@
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Gestión de Vehículos</h1>
+    <span class="badge">Sistema de Planillaje</span>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid">
+
+    <!-- IZQUIERDA -->
+    <div class="left">
+
+      <!-- BUSCADOR -->
+      <div class="card search-card">
+        <input 
+          type="text"
+          [(ngModel)]="placa"
+          (keyup.enter)="buscarVehiculo()"
+          placeholder="Buscar por placa..."
+        />
+
+        <button class="btn primary" (click)="buscarVehiculo()">Buscar</button>
+        <button class="btn" (click)="cargar()">Ver todos</button>
+      </div>
+
+      <!-- VEHÍCULOS -->
+      <div class="card">
+        <h3>Vehículos</h3>
+
+        <div class="table-container">
+          <table *ngIf="vehiculos.length > 0">
+            <thead>
+              <tr>
+                <th>Placa</th>
+                <th>Marca</th>
+                <th>Parqueadero</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr 
+                *ngFor="let v of vehiculos"
+                (click)="placaPlanillaje = v.placa; consultarPlanillaje()"
+                [class.active]="placaPlanillaje === v.placa"
+              >
+                <td><strong>{{ v.placa }}</strong></td>
+                <td>{{ v.marca }}</td>
+                <td>{{ v.numeroDeParqueadero }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="vehiculos.length === 0">
+          No hay vehículos
+        </div>
+
+        <!-- PAGINACIÓN -->
+        <div class="pagination" *ngIf="vehiculos.length > 0 && !placa">
+          <button (click)="page = page - 1; cargar()" [disabled]="page === 0">←</button>
+          <span>{{ page + 1 }} / {{ totalPages }}</span>
+          <button (click)="page = page + 1; cargar()" [disabled]="page >= totalPages - 1">→</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DERECHA -->
+    <div class="right">
+
+      <!-- BUSCAR PLANILLAJE -->
+      <div class="card">
+        <h3>Historial de Planillaje</h3>
+
+        <input 
+          type="text"
+          [(ngModel)]="placaPlanillaje"
+          (keyup.enter)="consultarPlanillaje()"
+          placeholder="Ingresar placa..."
+        />
+
+        <button class="btn primary" (click)="consultarPlanillaje()">Consultar</button>
+      </div>
+
+      <!-- RESULTADOS -->
+      <div class="card">
+        <h3>Resultados</h3>
+
+        <!-- 🔥 SCROLL HORIZONTAL -->
+        <div class="table-container scroll-x">
+          <table *ngIf="planillajes.length > 0">
+            <thead>
+              <tr>
+           
+                <th>Placa</th>
+                <th>Puesto</th>
+                
+                <th>Estado</th>
+                <th>Hora</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let p of planillajes; trackBy: trackById">
+               
+                <td><strong>{{ p.placa }}</strong></td>
+                <td>{{ p.nombrePuesto }}</td>
+              
+
+                <!-- BADGE -->
+                <td>
+                  <span 
+                    class="badge-status"
+                    [ngClass]="{
+                      'badge-success': p.novedadesPlanillaje === 'OK',
+                      'badge-warning': p.novedadesPlanillaje === 'PENDIENTE',
+                      'badge-danger': p.novedadesPlanillaje === 'DAÑO'
+                    }"
+                  >
+                    {{ p.novedadesPlanillaje }}
+                  </span>
+                </td>
+
+                <td>{{ p.horaInicio }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- MENSAJE -->
+        <div *ngIf="mensaje">
+          {{ mensaje }}
+        </div>
+
+        <!-- PAGINACIÓN -->
+        <div class="pagination" *ngIf="planillajes.length > 0">
+          <button (click)="anterior()" [disabled]="page === 0">←</button>
+          <span>{{ page + 1 }} / {{ totalPages }}</span>
+          <button (click)="siguiente()" [disabled]="page >= totalPages - 1">→</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

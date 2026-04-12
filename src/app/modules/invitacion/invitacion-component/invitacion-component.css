@@ -1,0 +1,107 @@
+/* CONTENEDOR */
+.contenedor-invitacion {
+  max-width: 450px;
+  margin: 50px auto;
+  background: #f5f6f8;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* TITULO */
+.contenedor-invitacion h2 {
+  color: #2a5298;
+  margin-bottom: 25px;
+}
+
+/* CAMPO */
+.campo {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* SELECT */
+select {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #eee;
+  transition: 0.3s;
+}
+
+select:focus {
+  outline: none;
+  border-color: #2a5298;
+  background: #fff;
+}
+
+/* BOTÓN GENERAR */
+.btn-generar {
+  width: 100%;
+  padding: 12px;
+  background: #2a5298;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-generar:hover {
+  background: #1e3c72;
+}
+
+/* TOKEN BOX */
+.token-box {
+  margin-top: 25px;
+  padding: 15px;
+  background: #e9efff;
+  border-radius: 10px;
+  word-break: break-all;
+}
+
+/* TEXTO TOKEN */
+.token-label {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.token {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2a5298;
+  margin-bottom: 10px;
+}
+
+/* BOTÓN COPIAR */
+.btn-copiar {
+  padding: 10px 15px;
+  background: #1e3c72;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-copiar:hover {
+  background: #16305a;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contenedor-invitacion {
+    margin: 20px;
+    padding: 20px;
+  }
+}

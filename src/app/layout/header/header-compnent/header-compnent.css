@@ -1,0 +1,112 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  height: 64px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* LEFT */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left h1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* MENU BUTTON (mobile) */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* RIGHT */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* SEARCH */
+.search-box {
+  position: relative;
+}
+
+.search-box span {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.search-box input {
+  padding: 8px 12px 8px 34px;
+  border-radius: 999px;
+  border: none;
+  background: #f1f5f9;
+  width: 220px;
+  outline: none;
+}
+
+/* ICON BUTTON */
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: #f1f5f9;
+}
+/* TABLET */
+@media (max-width: 1024px) {
+  .search-box input {
+    width: 150px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .menu-btn {
+    display: block; /* 🔥 aparece menú */
+  }
+
+  .search-box {
+    display: none; /* 🔥 ocultas búsqueda */
+  }
+
+  .header-left h1 {
+    font-size: 16px;
+  }
+
+}
+
+/* EXTRA SMALL */
+@media (max-width: 480px) {
+  .header-right {
+    gap: 6px;
+  }
+
+  .icon-btn {
+    padding: 6px;
+  }
+}

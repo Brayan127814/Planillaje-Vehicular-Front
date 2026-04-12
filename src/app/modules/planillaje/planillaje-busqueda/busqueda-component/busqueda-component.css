@@ -1,0 +1,288 @@
+.container {
+  padding: 30px;
+  background: #f5f6f8;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.busqueda {
+  display: flex;
+  gap: 10px;
+}
+
+.busqueda input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+.busqueda button {
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* CARDS */
+.cards {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card.blue {
+  background: #1d4ed8;
+  color: white;
+}
+
+/* SPINNER */
+.spinner {
+  width: 25px;
+  height: 25px;
+  border: 4px solid #ddd;
+  border-top: 4px solid #1d4ed8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* TABLA */
+.tabla {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #eee;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* PLACA */
+.placa {
+  background: #e0e7ff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* BADGE */
+.badge {
+  background: #dbeafe;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* PAGINACIÓN */
+.paginacion {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.container {
+  padding: 20px;
+  background: #f5f6f8;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* 🔥 clave */
+  gap: 15px;
+}
+
+.header h1 {
+  font-size: 22px;
+}
+
+.busqueda {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 350px;
+}
+
+.busqueda input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.busqueda button {
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 🔥 responsive real */
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card.blue {
+  background: #1d4ed8;
+  color: white;
+}
+
+/* SPINNER */
+.spinner {
+  width: 25px;
+  height: 25px;
+  border: 4px solid #ddd;
+  border-top: 4px solid #1d4ed8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* TABLA */
+.tabla {
+  background: white;
+  border-radius: 10px;
+  overflow-x: auto; /* 🔥 clave mobile */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* 🔥 evita que se rompa */
+}
+
+thead {
+  background: #eee;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* PLACA */
+.placa {
+  background: #e0e7ff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* BADGE */
+.badge {
+  background: #dbeafe;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* PAGINACIÓN */
+.paginacion {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* 🔥 */
+  gap: 10px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 600px) {
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .busqueda {
+    width: 100%;
+  }
+
+  .busqueda input {
+    width: 100%;
+  }
+
+  .paginacion {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header h1 {
+    font-size: 18px;
+  }
+
+}
