@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PageParqueadero, ParqueaderoResponse } from '../../../dtos/parqueaderos-dto/parqueadero-response';
 import { PageResponse } from '../../../dtos/planillaje/planillaje-paginados-dto';
+import { environment } from '../../../../environments/environments';
 
 @Injectable({
    providedIn: 'root',
 })
 export class ParqueaderoService {
-   private Api = "http://localhost:8082/parqueaderos"
+private Api = `${environment.api}/parqueaderos`
 
 
    constructor(private http: HttpClient) { }

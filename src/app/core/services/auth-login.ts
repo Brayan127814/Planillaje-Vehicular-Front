@@ -6,7 +6,7 @@ import { AuthResponse, LoginRequest } from '../../dtos/usuarios/login-dto';
   providedIn: 'root',
 })
 export class AuthLogin {
-  private Api = "http://localhost:8082/usuarios"
+private Api = "https://planillajevehicular-1.onrender.com/usuarios"
 
   constructor(private http: HttpClient) { }
 

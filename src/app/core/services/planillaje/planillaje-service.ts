@@ -5,12 +5,13 @@ import { PlanillajeResponse } from '../../../dtos/planillaje/PlanillajeResponse'
 import { Observable } from 'rxjs';
 import { PageResponse } from '../../../dtos/planillaje/planillaje-paginados-dto';
 import { PageResponseP } from '../../../dtos/planillaje/pageResponse';
+import { environment } from '../../../../environments/environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlanillajeService {
-  private Api = "http://localhost:8082/planillajeVehicular"
+  private Api = `${environment.api}/planillajeVehicular`
 
   constructor(private http: HttpClient) { }
 

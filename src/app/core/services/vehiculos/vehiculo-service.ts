@@ -2,13 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, numberAttribute } from '@angular/core';
 import { PageResponseV, VehiculoRequest, VehiculoResponse } from '../../../dtos/vehiculo/vhiculo-dto';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VehiculoService {
 
-  private Api = "http://localhost:8082/vehiculos"
+private Api = `${environment.api}/vehiculos`
 
   constructor(private http: HttpClient) { }
 
