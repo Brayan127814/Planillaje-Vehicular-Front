@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { registroRequest, RegistroResponse } from '../../../dtos/usuarios/registro-dto';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from '../../../../environments/environments';
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
-  private Api = "http://localhost:8082/usuarios"
+ private Api = `${environment}/usuarios`
   constructor(private http: HttpClient) { }
 
   registrarUsuario(data: registroRequest) {
