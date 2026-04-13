@@ -61,11 +61,11 @@ registrar() {
       }).subscribe({
         next: loginRes => {
           // ✅ CORREGIDO: Usar los nombres exactos de la interfaz AuthResponse
-          localStorage.setItem("AccessToken", loginRes.AccessToken)      // ← Mayúscula A y T
+          localStorage.setItem("accessToken", loginRes.AccessToken)      // ← Mayúscula A y T
           localStorage.setItem("RefreshToken", loginRes.RefreshToken)    // ← Mayúscula R y T
 
           console.log("AUTO LOGIN OK")
-          console.log("Token guardado:", localStorage.getItem("AccessToken"))
+          console.log("Token guardado:", localStorage.getItem("accessToken"))
 
           // 🚀 REDIRECCIÓN
           this.router.navigate(["/dashboard"])
