@@ -18,8 +18,8 @@ export class AuthLogin {
           console.log('🔵 Respuesta del backend:', response);
           // Guardar el token inmediatamente cuando llega la respuesta
           if (response && response.AccessToken) {
-            localStorage.setItem('accessToken', response.AccessToken);
-            localStorage.setItem('refreshToken', response.RefreshToken);
+            localStorage.setItem("AccessToken", response.AccessToken);
+            localStorage.setItem("RefreshToken", response.RefreshToken);
             console.log('✅ Token guardado en localStorage');
           }
         })
