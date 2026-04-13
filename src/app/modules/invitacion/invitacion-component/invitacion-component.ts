@@ -24,7 +24,7 @@ export class InvitacionComponent implements OnInit {
     private puestoService: PuestoServices,
     private invitacionService: InvitacionService,
     private cdr: ChangeDetectorRef // 🔥 Para forzar detección de cambios
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.cargarPuestos();
@@ -57,7 +57,7 @@ export class InvitacionComponent implements OnInit {
       next: (res: any) => {
         console.log('RESPUESTA completa:', res);
         const token = res?.token
-          ? `http://localhost:4200/registrate?token=${res.token}`
+          ? `https://planillaje-vehicular-front.onrender.com/registrate?token=${res.token}`
           : '';
         console.log('TOKEN GENERADO:', token);
         this.tokenSubject.next(token);
