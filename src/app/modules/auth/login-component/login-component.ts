@@ -29,7 +29,7 @@ export class LoginComponent {
     this.auth.login(this.loginForm.value).subscribe({
       next: res => {
         localStorage.setItem("accessToken", res.AccessToken)
-        localStorage.setItem("RefreshToken", res.refreshToken)
+        localStorage.setItem("RefreshToken", res.RefreshToken)
         console.log("LOGIN EXITOSO")
         console.log(res.AccessToken)
         this.router.navigate(["/dashboard"])
