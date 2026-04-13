@@ -5,5 +5,5 @@ export interface LoginRequest {
 
 export interface AuthResponse {
   AccessToken: string;
-  refreshToken: string;
+  RefreshToken: string;
 }
