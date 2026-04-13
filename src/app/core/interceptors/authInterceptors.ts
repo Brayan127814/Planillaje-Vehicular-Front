@@ -1,7 +1,8 @@
 import { HttpInterceptorFn } from "@angular/common/http";
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-    const token = localStorage.getItem("accessToken")  
+    // ✅ Cambiar a "AccessToken" con mayúscula
+    const token = localStorage.getItem("AccessToken")  
     console.log("TOKEN: ", token)
     
     if (token) {

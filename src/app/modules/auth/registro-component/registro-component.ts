@@ -39,7 +39,7 @@ registrar() {
     return
   }
 
-  const formValue = this.formsRegistro.getRawValue() // 👈 guardamos antes del reset
+  const formValue = this.formsRegistro.getRawValue()
 
   const data = {
     ...formValue,
@@ -60,11 +60,12 @@ registrar() {
         password: formValue.password
       }).subscribe({
         next: loginRes => {
-
-          localStorage.setItem("accessToken", loginRes.AccessToken)
-          localStorage.setItem("RefreshToken", loginRes.refreshToken)
+          // ✅ CORREGIDO: Usar los nombres exactos de la interfaz AuthResponse
+          localStorage.setItem("AccessToken", loginRes.AccessToken)      // ← Mayúscula A y T
+          localStorage.setItem("RefreshToken", loginRes.RefreshToken)    // ← Mayúscula R y T
 
           console.log("AUTO LOGIN OK")
+          console.log("Token guardado:", localStorage.getItem("AccessToken"))
 
           // 🚀 REDIRECCIÓN
           this.router.navigate(["/dashboard"])
