@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: planillaje-vehicular-front
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist/planillaje-vehicular/browser
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
