@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environments';
   providedIn: 'root',
 })
 export class Auth {
- private Api = `${environment}/usuarios`
+private Api = `${environment.api}/usuarios`
   constructor(private http: HttpClient) { }
 
   registrarUsuario(data: registroRequest) {
