@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Auth } from '../../../core/services/auth/auth';
+import { flush } from '@angular/core/testing';
+import { flatMap } from 'rxjs';
 
 @Component({
   selector: 'app-aside-component',
@@ -15,5 +17,8 @@ export class AsideComponent {
 
   constructor(public authService:  Auth) {}
 
+testNav() {
+  console.log('CLICK TEST');
+}
 
 }

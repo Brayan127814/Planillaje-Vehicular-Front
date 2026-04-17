@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponse, LoginRequest } from '../../dtos/usuarios/login-dto';
+import { environment } from '../../../environments/environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthLogin {
-  private Api = "https://planillajevehicular-1.onrender.com/usuarios"
+  private Api = `${environment.api}/usuarios`
 
   constructor(private http: HttpClient) { }
 

@@ -1,178 +1,192 @@
-
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-/* CONTENEDOR GENERAL */
-.container {
-  display: flex;
+.login-page {
   min-height: 100vh;
-}
-
-/* PANEL IZQUIERDO */
-.left-panel {
-  flex: 1;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  background: #f7f9fb;
+  padding: 20px; /* clave */
 }
-
-.overlay {
-  max-width: 400px;
-}
-
-.tag {
-  font-size: 12px;
-  letter-spacing: 2px;
-  opacity: 0.7;
-  margin-bottom: 20px;
-}
-
-.left-panel h1 {
-  font-size: 28px;
-  line-height: 1.4;
-  margin-bottom: 40px;
-}
-
-.card-info {
-  background: rgba(255,255,255,0.1);
-  padding: 15px;
-  border-radius: 10px;
-}
-
-/* PANEL DERECHO */
-.right-panel {
-  flex: 1;
-  background: #f5f6f8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.form-container {
+.login-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  max-height: 100%;
+  overflow: hidden;
+ 
+}
+/* FONDO DIFUMINADO */
+.background-blur::before,
+.background-blur::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
 }
 
-/* TEXTOS */
-.step {
-  font-size: 12px;
-  color: #ff6b00;
-  margin-bottom: 10px;
+.background-blur::before {
+  width: 400px;
+  height: 400px;
+  background: #d8e2ff;
+  top: -100px;
+  left: -100px;
+}
+
+.background-blur::after {
+  width: 300px;
+  height: 300px;
+  background: #d5e3fc;
+  bottom: -100px;
+  right: -100px;
+}
+
+/* CONTENEDOR */
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  z-index: 1;
+}
+
+/* LOGO */
+.logo-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-box {
+  width: 56px;
+  height: 56px;
+  background: #005ac2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  box-shadow: 0 10px 20px rgba(0, 90, 194, 0.2);
+}
+
+.logo-box span {
+  color: white;
+  font-size: 28px;
+}
+
+/* CARD */
+.login-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* TITLES */
+.login-card h2 {
+  margin-bottom: 5px;
 }
 
 .subtitle {
+  color: #6b7280;
   font-size: 14px;
-  color: #777;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
-/* FORMULARIO */
-form {
+/* INPUT */
+.input-group {
   display: flex;
-  flex-direction: column;
-}
-
-label {
-  font-size: 12px;
-  margin-bottom: 5px;
-  color: #555;
-}
-
-input {
+  align-items: center;
+  background: #eef2f6;
   padding: 12px;
+  border-radius: 8px;
   margin-bottom: 15px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  background: #eee;
-  transition: 0.3s;
+  gap: 8px;
 }
 
-input:focus {
-  outline: none;
-  border-color: #2a5298;
-  background: #fff;
-}
-
-/* BOTÓN */
-button {
-  padding: 12px;
-  background: #2a5298;
-  color: white;
+.input-group input {
   border: none;
-  border-radius: 6px;
+  background: transparent;
+  outline: none;
+  flex: 1;
+}
+
+.input-group span {
+  color: #9ca3af;
+}
+
+.eye {
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
 }
 
-button:hover {
-  background: #1e3c72;
+/* ERROR */
+.invalid {
+  border: 1px solid red;
 }
 
-/* MENSAJES */
-.success {
-  color: green;
-  margin-top: 10px;
-}
-
-.error {
-  color: red;
-  margin-top: 10px;
-}
-
-.debug {
-  font-size: 12px;
-  margin-top: 10px;
-  color: #888;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .left-panel {
-    display: none;
-  }
-
-  .right-panel {
-    padding: 20px;
-  }
-}
-
-
-/* ERRORES INPUT */
-input.invalid {
-  border-color: red;
-  background: #fff0f0;
-}
-
-/* FORGOT PASSWORD */
-.forgot-password {
+/* LINKS */
+.forgot {
   text-align: right;
-  margin-bottom: 15px;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 
-.forgot-password a {
-  font-size: 13px;
-  color: #777;
+.forgot a {
+  color: #2563eb;
   text-decoration: none;
 }
 
-.forgot-password a:hover {
-  text-decoration: underline;
+/* REMEMBER */
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 15px;
+  font-size: 13px;
 }
 
-/* PEQUEÑO AJUSTE LOGIN */
-.step {
-  color: #2a5298;
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+  background: #005ac2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #004fab;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+/* DIVIDER */
+.divider {
+  margin: 25px 0;
+  text-align: center;
+  font-size: 12px;
+  color: #9ca3af;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 10px;
+}
+
+/* REGISTER */
+.register {
+  text-align: center;
+  font-size: 14px;
+}
+
+.register a {
+  color: #2563eb;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 20px;
 }

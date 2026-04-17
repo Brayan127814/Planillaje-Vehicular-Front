@@ -1,52 +1,79 @@
-<div class="container">
+<main class="login-page">
 
-  <!-- PANEL IZQUIERDO (igual que registro) -->
-  <div class="left-panel">
-    <div class="overlay">
-      <p class="tag">SYSTEM ACCESS</p>
-      <h1>Secure access to surveillance operations.</h1>
+  <div class="background-blur"></div>
 
-      <div class="card-info">
-        <strong>Sentient Shield</strong>
-        <p>Advanced monitoring & control system.</p>
+  <div class="login-container">
+
+    <!-- LOGO -->
+    <div class="logo-section">
+      <div class="logo-box">
+        <span class="material-symbols-outlined">local_shipping</span>
       </div>
+      <h1>Planillaje Vehicular</h1>
+      <p>Gestión de flota inteligente</p>
     </div>
-  </div>
 
-  <!-- PANEL DERECHO -->
-  <div class="right-panel">
-    <div class="form-container">
+    <!-- CARD -->
+    <div class="login-card">
 
-      <p class="step">LOGIN</p>
-      <h2>Bienvenido</h2>
-      <p class="subtitle">Accede al sistema de vigilancia</p>
+      <h2>Bienvenido de nuevo</h2>
+      <p class="subtitle">Ingresa tus credenciales para continuar</p>
 
-      <form [formGroup]="loginForm" (ngSubmit)="loginSesion()" class="login-form">
+      <form [formGroup]="loginForm" (ngSubmit)="loginSesion()">
 
-        <label>USUARIO</label>
-        <input type="text" formControlName="username" placeholder="Nombre de usuario"
-          [class.invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+        <!-- USER -->
+        <label>Usuario</label>
+        <div class="input-group">
+          <span class="material-symbols-outlined">person</span>
+          <input
+            type="text"
+            formControlName="username"
+            placeholder="nombre.apellido"
+            [class.invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"
+          >
+        </div>
 
-        <label>CONTRASEÑA</label>
-        <input type="password" formControlName="password" placeholder="••••••••"
-          [class.invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+        <!-- PASSWORD -->
+        <label>Contraseña</label>
+        <div class="input-group">
+          <span class="material-symbols-outlined">lock</span>
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="••••••••"
+            [class.invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+          >
+          <span class="material-symbols-outlined eye">visibility</span>
+        </div>
 
-        <div class="forgot-password">
+        <div class="forgot">
           <a href="#">¿Olvidaste tu contraseña?</a>
         </div>
 
+        <div class="remember">
+          <input type="checkbox">
+          <label>Mantener sesión iniciada</label>
+        </div>
+
         <button type="submit" [disabled]="loginForm.pending">
-          Iniciar Sesión →
+          Iniciar sesión →
         </button>
 
       </form>
 
-      <div class="footer-links">
-        <span>¿No tienes una cuenta? </span>
-        <a routerLink="/registrate" class="request-access">Crear cuenta</a>
-      </div>
+      <div class="divider">¿ERES NUEVO AQUÍ?</div>
+
+      <p class="register">
+        ¿Deseas registrar tu flota?
+        <a routerLink="/registrate">Crear empresa</a>
+      </p>
 
     </div>
+
+    <div class="footer">
+      Logistics Corp — v1.0.4
+    </div>
+
   </div>
 
-</div>
+</main>

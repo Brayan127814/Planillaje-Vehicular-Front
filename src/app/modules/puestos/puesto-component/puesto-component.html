@@ -1,30 +1,37 @@
 <div class="contenedor-doble">
 
   <!-- IZQUIERDA -->
-  <div class="panel">
-    <h2>Registrar Nuevo Puesto</h2>
+  <div class="panel card">
 
-    <p *ngIf="mensajeExit" class="mensaje-exito">{{ mensajeExit }}</p>
-    <p *ngIf="errorMensaje" class="mensaje-error">{{ errorMensaje }}</p>
+    <div class="panel-header">
+      <span class="material-symbols-outlined icon">business</span>
+      <div>
+        <h2>Nuevo Puesto</h2>
+        <p>Registra un nuevo punto operativo</p>
+      </div>
+    </div>
+
+    <p *ngIf="mensajeExit" class="alert success">{{ mensajeExit }}</p>
+    <p *ngIf="errorMensaje" class="alert error">{{ errorMensaje }}</p>
 
     <form [formGroup]="formsPuestos" (ngSubmit)="registrarPuesto()">
 
       <div class="campo">
         <label>Nombre del Puesto</label>
-        <input type="text" formControlName="nombrePuesto">
+        <input type="text" formControlName="nombrePuesto" placeholder="Ej: Terminal Norte">
       </div>
 
       <div class="campo">
         <label>Dirección</label>
-        <input type="text" formControlName="direccion">
+        <input type="text" formControlName="direccion" placeholder="Calle 123 #45-67">
       </div>
 
       <div class="campo">
         <label>Total de Parqueaderos</label>
-        <input type="number" formControlName="totalParqueaderos">
+        <input type="number" formControlName="totalParqueaderos" placeholder="Ej: 50">
       </div>
 
-      <button type="submit" [disabled]="formsPuestos.invalid">
+      <button type="submit" [disabled]="formsPuestos.invalid" class="btn-primary">
         Guardar Puesto
       </button>
 
@@ -32,12 +39,18 @@
   </div>
 
   <!-- DERECHA -->
-  <div class="panel">
-    <h2>Crear Parqueaderos</h2>
+  <div class="panel card">
 
-    <!-- Mensajes para parqueaderos -->
-    <p *ngIf="mensajeExitParqueaderos" class="mensaje-exito">{{ mensajeExitParqueaderos }}</p>
-    <p *ngIf="errorMensajeParqueaderos" class="mensaje-error">{{ errorMensajeParqueaderos }}</p>
+    <div class="panel-header">
+      <span class="material-symbols-outlined icon">local_parking</span>
+      <div>
+        <h2>Parqueaderos</h2>
+        <p>Genera espacios automáticamente</p>
+      </div>
+    </div>
+
+    <p *ngIf="mensajeExitParqueaderos" class="alert success">{{ mensajeExitParqueaderos }}</p>
+    <p *ngIf="errorMensajeParqueaderos" class="alert error">{{ errorMensajeParqueaderos }}</p>
 
     <div class="campo">
       <label>Seleccionar Puesto</label>
@@ -50,6 +63,7 @@
     </div>
 
     <button 
+      class="btn-secondary"
       [disabled]="!puestoSeleccionado"
       (click)="crearParqueaderos()">
       Generar Parqueaderos

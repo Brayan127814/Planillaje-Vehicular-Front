@@ -1,24 +1,44 @@
 <div class="container">
 
+    <!-- FORM -->
     <div class="form-card">
-        <h2>Ingreso de Vehículo</h2>
-        <p class="subtitle">Complete los datos técnicos para el registro en el sistema.</p>
 
+        <div class="form-header">
+            <div class="title-group">
+                <span class="material-symbols-outlined icon">directions_car</span>
+                <div>
+                    <h2>Ingreso de Vehículo</h2>
+                    <p>Complete los datos técnicos para el registro en el sistema</p>
+                </div>
+            </div>
+
+            <!-- EXTRA (dato útil del back) -->
+            <div class="mini-stats">
+                <span>Total hoy</span>
+                <strong>{{ (parqueaderos$ | async)?.totalElements || 0 }}</strong>
+            </div>
+        </div>
+
+        <!-- ALERTAS -->
         <div *ngIf="successMessage" class="success-alert">
             <span class="material-symbols-outlined">check_circle</span>
             Vehículo registrado correctamente
         </div>
+
         <div *ngIf="errorMessage" class="error-alert">
             <span class="material-symbols-outlined">error</span>
             {{ errorMessage }}
         </div>
 
+        <!-- FORM -->
         <form [formGroup]="formVehiculo" class="form" (ngSubmit)="agregarCarro()">
+
             <div class="row">
                 <div class="field">
                     <label>PLACA</label>
                     <input formControlName="placa" placeholder="ABC-123" />
                 </div>
+
                 <div class="field">
                     <label>MARCA</label>
                     <input formControlName="marca" placeholder="Ej: Toyota" />
@@ -37,11 +57,15 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn">Registrar Vehículo</button>
+            <button type="submit" class="btn">
+                Registrar Vehículo
+            </button>
         </form>
     </div>
 
+    <!-- PANEL DERECHO -->
     <div class="right-panel">
+
         <div class="header">
             <h3>Parqueaderos Libres</h3>
             <span class="badge">
@@ -51,7 +75,9 @@
 
         <div class="list">
             <ng-container *ngIf="parqueaderos$ | async as data; else loading">
-                <div *ngFor="let p of data.content" class="card"
+
+                <div *ngFor="let p of data.content"
+                    class="card"
                     [class.selected]="formVehiculo.get('parqueaderoId')?.value === p.id"
                     (click)="formVehiculo.patchValue({ parqueaderoId: p.id })">
 
@@ -59,8 +85,10 @@
                         <h4>{{ p.nombrePuesto }}</h4>
                         <p>Parqueadero #{{ p.numeroParqueadero }}</p>
                     </div>
+
                     <span class="status">{{ p.estado }}</span>
                 </div>
+
             </ng-container>
 
             <ng-template #loading>
@@ -69,13 +97,11 @@
         </div>
 
         <div class="pagination">
-            <button (click)="anterior()" [disabled]="pagina === 0">
-                ← Anterior
-            </button>
-            <span>Página {{ pagina + 1 }} de {{ totalPaginas }}</span>
-            <button (click)="siguiente()" [disabled]="pagina === totalPaginas - 1">
-                Siguiente →
-            </button>
+            <button (click)="anterior()" [disabled]="pagina === 0">←</button>
+            <span>{{ pagina + 1 }} / {{ totalPaginas }}</span>
+            <button (click)="siguiente()" [disabled]="pagina === totalPaginas - 1">→</button>
         </div>
+
     </div>
+
 </div>

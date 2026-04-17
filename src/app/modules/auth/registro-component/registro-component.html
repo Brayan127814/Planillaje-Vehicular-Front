@@ -23,18 +23,40 @@
         Enter your credentials to initialize your workspace.
       </p>
 
-      <form [formGroup]="formsRegistro" (ngSubmit)="registrar()">
+      <!-- ⚠️ Alerta de token inválido -->
+      <div *ngIf="tokenInvalido" class="alert alert-error">
+        <strong>🔒 Enlace Inválido</strong>
+        <p>Este enlace de invitación ya no está disponible. Por favor, solicita un nuevo enlace de registro.</p>
+        <button (click)="resetFormulario()" class="btn-reset">Solicitar nuevo enlace</button>
+      </div>
+
+      <form [formGroup]="formsRegistro" (ngSubmit)="registrar()" *ngIf="!tokenInvalido">
 
         <label>FULL NAME</label>
         <input type="text" placeholder="John Doe" formControlName="nombre" />
+        <div *ngIf="formsRegistro.get('nombre')?.invalid && formsRegistro.get('nombre')?.touched" class="field-error">
+          El nombre es requerido
+        </div>
 
         <label>USERNAME</label>
         <input type="text" placeholder="@j.doe_arch" formControlName="username" />
+        <div *ngIf="formsRegistro.get('username')?.invalid && formsRegistro.get('username')?.touched" class="field-error">
+          <span *ngIf="formsRegistro.get('username')?.errors?.['required']">El username es requerido</span>
+          <span *ngIf="formsRegistro.get('username')?.errors?.['taken']">⚠️ Este username ya está en uso</span>
+        </div>
 
         <label>SECURITY PASSWORD</label>
         <input type="password" placeholder="********" formControlName="password" />
+        <div *ngIf="formsRegistro.get('password')?.invalid && formsRegistro.get('password')?.touched" class="field-error">
+          La contraseña es requerida
+        </div>
 
-        <button type="submit">Continue Setup →</button>
+        <button type="submit" [disabled]="isLoading || formsRegistro.disabled">
+          <span *ngIf="!isLoading">Continue Setup →</span>
+          <span *ngIf="isLoading" class="loading-spinner">
+            <span class="spinner"></span> Processing...
+          </span>
+        </button>
 
       </form>
 
@@ -42,8 +64,15 @@
       <p class="debug">Token recibido: {{ token }}</p>
 
       <!-- MENSAJES -->
-      <p *ngIf="mensajeExit" class="success">{{ mensajeExit }}</p>
-      <p *ngIf="errorMensaje" class="error">{{ errorMensaje }}</p>
+      <div *ngIf="mensajeExit" class="success">
+        <strong>✅ Éxito!</strong>
+        <p>{{ mensajeExit }}</p>
+      </div>
+      
+      <div *ngIf="errorMensaje && !tokenInvalido" class="error">
+        <strong>❌ Error</strong>
+        <p>{{ errorMensaje }}</p>
+      </div>
 
     </div>
   </div>
