@@ -57,9 +57,9 @@ export class InvitacionComponent implements OnInit {
       next: (res: any) => {
         console.log('RESPUESTA completa:', res);
         const token = res?.token
-          ? `http://localhost:4200/#/registrate?token=${res.token}`
+          ? `//https://planillaje-vehicular-front.onrender.com/#/registrate?token=${res.token}`
           : '';
-        //https://planillaje-vehicular-front.onrender.com/#/registrate?token=${res.token}
+        //https://planillaje-vehicular-front.onrender.com/#/registrate?token=${res.token}http://localhost:4200/#/registrate?token=${res.token}
         console.log('TOKEN GENERADO:', token);
         this.tokenSubject.next(token);
       },
