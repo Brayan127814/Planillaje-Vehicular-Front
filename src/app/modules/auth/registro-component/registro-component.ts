@@ -33,7 +33,7 @@ export class RegistroComponent implements OnInit{
 
   ngOnInit(): void {
       this.token = this.route.snapshot.queryParamMap.get('token') || ''
-      console.log('TOKEN DESDE LA URL', this.token)
+     
       
       // Verificar si hay token en la URL
       if (!this.token) {
@@ -72,8 +72,6 @@ export class RegistroComponent implements OnInit{
       ...formValue,
       token: this.token
     }
-
-    console.log(data)
 
     this.authService.registrarUsuario(data).subscribe({
       next: res => {

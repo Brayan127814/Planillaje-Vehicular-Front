@@ -15,7 +15,7 @@
         <span class="material-symbols-outlined">assignment_add</span>
         <span class="nav-label">Crear Invitación</span>
       </a>
-       <a (click)="testNav()" class="nav-item">NVA</a>
+     
 
       <a *ngIf="authService.hasRole('ROLE_ADMIN')" routerLink="crear-puesto" routerLinkActive="active" class="nav-item">
         <span class="material-symbols-outlined">assignment_add</span>
@@ -29,12 +29,12 @@
         <span class="nav-label">Registrar Planillaje</span>
       </a>
 
-      <a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')"
+      <!--<a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')"
         routerLink="conssultar-planillaje" routerLinkActive="active" class="nav-item">
         <span class="material-symbols-outlined">inventory</span>
         <span class="nav-label">Consultar Planilla</span>
       </a>
-
+-->
       <a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')"
         routerLink="registrar-vehiculo" routerLinkActive="active" class="nav-item">
         <span class="material-symbols-outlined">directions_car</span>

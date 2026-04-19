@@ -9,11 +9,14 @@ import { ParqueaderoComponent } from './modules/parqueaderos/parqueadero-compone
 import { InvitacionComponent } from './modules/invitacion/invitacion-component/invitacion-component';
 import { RegistroComponent } from './modules/auth/registro-component/registro-component';
 import { PuestoComponent } from './modules/puestos/puesto-component/puesto-component';
+import { EmpresaComponent } from './modules/empresas/empresa-component/empresa-component';
 
 export const routes: Routes = [
   { path: 'registrate', component: RegistroComponent },
   // 1. Ruta de Login
   { path: 'login', component: LoginComponent },
+
+  { path: 'registrar-empresa', component: EmpresaComponent },
 
   // 2. Ruta del Dashboard con sus hijos
   {

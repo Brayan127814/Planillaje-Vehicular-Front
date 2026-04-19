@@ -1,0 +1,88 @@
+<div class="container">
+
+  <!-- PANEL IZQUIERDO -->
+  <div class="left-panel">
+    <div class="overlay">
+      <p class="tag">REGISTRO</p>
+      <h1>Registra tu empresa y comienza a gestionar tu flota.</h1>
+
+      <div class="card-info">
+        <strong>Planillaje Vehicular</strong>
+        <p>Control total de parqueaderos y operaciones.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL DERECHO -->
+  <div class="right-panel">
+
+    <div class="form-container">
+
+      <p class="step">SETUP</p>
+      <h2>Crear Empresa</h2>
+      <p class="subtitle">Configura tu organización y usuario administrador</p>
+
+      <!-- ALERTAS -->
+      <div *ngIf="mensajeExit" class="success-alert">
+        <span class="material-symbols-outlined">check_circle</span>
+        {{ mensajeExit }}
+      </div>
+
+      <div *ngIf="errorMensaje" class="error-alert">
+        <span class="material-symbols-outlined">error</span>
+        {{ errorMensaje }}
+      </div>
+
+      <!-- FORM -->
+      <form [formGroup]="empresaForm" (ngSubmit)="registro()" class="form">
+
+        <!-- EMPRESA -->
+        <div class="field-group">
+          <label>NOMBRE EMPRESA</label>
+          <input type="text" formControlName="nombreEmpresa" placeholder="Ej: Mi Empresa S.A.S"
+            [class.invalid]="empresaForm.get('nombreEmpresa')?.touched && empresaForm.get('nombreEmpresa')?.invalid">
+        </div>
+
+        <div class="field-group">
+          <label>NIT</label>
+          <input type="text" formControlName="nit" placeholder="Ej: 900123456"
+            [class.invalid]="empresaForm.get('nit')?.touched && empresaForm.get('nit')?.invalid">
+        </div>
+
+        <!-- ADMIN -->
+        <div class="field-group">
+          <label>NOMBRE ADMINISTRADOR</label>
+          <input type="text" formControlName="nombre" placeholder="Nombre completo"
+            [class.invalid]="empresaForm.get('nombre')?.touched && empresaForm.get('nombre')?.invalid">
+        </div>
+
+        <div class="field-group">
+          <label>USUARIO</label>
+          <input type="text" formControlName="username" placeholder="Usuario"
+            [class.invalid]="empresaForm.get('username')?.touched && empresaForm.get('username')?.invalid">
+        </div>
+
+        <div class="field-group">
+          <label>CONTRASEÑA</label>
+          <input type="password" formControlName="password" placeholder="••••••••"
+            [class.invalid]="empresaForm.get('password')?.touched && empresaForm.get('password')?.invalid">
+        </div>
+
+        <!-- BOTÓN -->
+        <button type="submit" [disabled]="loading">
+          {{ loading ? 'Registrando...' : 'Crear Empresa →' }}
+        </button>
+
+      </form>
+
+      <!-- FOOTER -->
+      <div class="footer-links">
+        <span>¿Ya tienes cuenta?</span>
+        <a routerLink="/login">Iniciar sesión</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
