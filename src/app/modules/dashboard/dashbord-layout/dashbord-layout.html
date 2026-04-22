@@ -1,0 +1,207 @@
+<!--CONTENIDO-->
+<div class="div-container">
+
+  <!-- BANNER MÓVIL (solo visible en mobile) -->
+  <div class="mobile-banner">
+    <div class="banner-content">
+      <div class="banner-icon">
+        <span class="material-symbols-outlined">info</span>
+      </div>
+      <div class="banner-text">
+        <h4>Sistema de Gestión de Flota</h4>
+        <p>Administra y consulta el registro de vehículos en tiempo real</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="div-left">
+    <div class="header-card">
+      <span class="label">Vehículos Activos</span>
+      <span class="value">{{ totalActivos }}</span>
+    </div>
+
+    <div class="div-card">
+      <div class="card activos">
+        <span class="card-icon">🚗</span>
+        <div class="card-info">
+          <span class="card-label">Activos</span>
+          <span class="card-value">{{ totalActivos }}</span>
+        </div>
+      </div>
+      <div class="card planillados">
+        <span class="card-icon">📋</span>
+        <div class="card-info">
+          <span class="card-label">En Ruta</span>
+          <span class="card-value">{{ totalPlanillados }}</span>
+        </div>
+      </div>
+      <div class="card total">
+        <span class="card-icon">📊</span>
+        <div class="card-info">
+          <span class="card-label">Total registrados</span>
+          <span class="card-value">{{ estadisticas.totalRegistrados }}</span>
+        </div>
+      </div>
+      <div class="card parqueadero">
+        <span class="card-icon">🅿️</span>
+        <div class="card-info">
+          <span class="card-label">Parqueaderos</span>
+          <span class="card-value">{{ estadisticas.parqueaderos }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div-right">
+    <h3>Acceso Rápido</h3>
+
+    <div class="div-content">
+      <div class="item" (click)="navegarARegistrarVehiculo()">
+        <div class="icon-box"></div>
+        <div class="text">
+          <p class="title">Registrar vehículo</p>
+          <p class="desc">Añadir nueva unidad a la base</p>
+        </div>
+      </div>
+
+      <div class="item" (click)="navegarAPlanillaje()">
+        <div class="icon-box"></div>
+        <div class="text">
+          <p class="title">Generar planillaje</p>
+          <p class="desc">Control de despacho diario</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini stats para móvil -->
+    <div class="mobile-stats">
+      <div class="mini-stat">
+        <span class="mini-stat-value">{{ estadisticas.activosHoy }}</span>
+        <span class="mini-stat-label">Activos Hoy</span>
+      </div>
+      <div class="mini-stat">
+        <span class="mini-stat-value">{{ estadisticas.planillajesHoy }}</span>
+        <span class="mini-stat-label">Planillajes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- tabla de vehículos -->
+  <div class="cart-container">
+    <div class="header-cart">
+      <div class="cart-title">
+        <h2>Vehículos Recientes</h2>
+      </div>
+      <div class="cart-input">
+        <input 
+          type="text" 
+          placeholder="Buscar por placa o marca..." 
+          [(ngModel)]="searchText"
+        />
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-state" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>Cargando vehículos...</p>
+    </div>
+
+    <!-- Vista Desktop: Tabla -->
+    <div class="desktop-table" *ngIf="!isLoading">
+      <table class="card-table">
+        <thead>
+          <tr>
+            <th>Vehículo</th>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Parqueadero</th>
+            <th>Estado</th>
+            <th>Último Reporte</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vehiculo of vehiculosPaginados">
+            <td><strong>{{ vehiculo.nombre }}</strong></td>
+            <td>{{ vehiculo.placa }}</td>
+            <td>{{ vehiculo.marca }}</td>
+            <td>#{{ vehiculo.parqueadero }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="obtenerClaseEstado(vehiculo.estado)">
+                <span class="material-symbols-outlined">{{ obtenerIconoEstado(vehiculo.estado) }}</span>
+                {{ vehiculo.estado }}
+              </span>
+            </td>
+            <td>{{ vehiculo.ultimoReporte }}</td>
+            <td>
+              <button class="btn-action" (click)="verPlanillaje(vehiculo)">
+                <span class="material-symbols-outlined">visibility</span>
+                Ver planillaje
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Vista Móvil: Cards -->
+    <div class="mobile-cards" *ngIf="!isLoading">
+      <div class="vehicle-card" *ngFor="let vehiculo of vehiculosPaginados">
+        <div class="vehicle-card-header">
+          <div class="vehicle-icon">
+            <span class="material-symbols-outlined">directions_car</span>
+          </div>
+          <div class="vehicle-title">
+            <h4>{{ vehiculo.nombre }}</h4>
+            <p>Placa: {{ vehiculo.placa }}</p>
+          </div>
+          <span class="status-badge-mobile" [ngClass]="obtenerClaseEstado(vehiculo.estado)">
+            {{ vehiculo.estado }}
+          </span>
+        </div>
+        <div class="vehicle-card-body">
+          <div class="vehicle-info">
+            <span class="info-label">Marca</span>
+            <span class="info-value">{{ vehiculo.marca }}</span>
+          </div>
+          <div class="vehicle-info">
+            <span class="info-label">Parqueadero</span>
+            <span class="info-value">#{{ vehiculo.parqueadero }}</span>
+          </div>
+          <div class="vehicle-info">
+            <span class="info-label">Último Reporte</span>
+            <span class="info-value">{{ vehiculo.ultimoReporte }}</span>
+          </div>
+        </div>
+        <div class="vehicle-card-footer">
+          <button class="btn-action-mobile" (click)="verPlanillaje(vehiculo)">
+            <span class="material-symbols-outlined">visibility</span>
+            Ver planillaje
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sin resultados -->
+    <div class="no-results" *ngIf="!isLoading && vehiculosFiltrados.length === 0">
+      <span class="material-symbols-outlined">search_off</span>
+      <p>No se encontraron vehículos con "{{ searchText }}"</p>
+    </div>
+
+    <!-- Paginación -->
+    <div class="pagination" *ngIf="!isLoading && vehiculosFiltrados.length > 0">
+      <button (click)="paginaAnterior()" [disabled]="currentPage === 1">
+        <span class="material-symbols-outlined">chevron_left</span>
+        Anterior
+      </button>
+      <span class="page-info">
+        Página {{ currentPage }} de {{ totalPages }}
+      </span>
+      <button (click)="paginaSiguiente()" [disabled]="currentPage === totalPages">
+        Siguiente
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+    </div>
+  </div>
+</div>
