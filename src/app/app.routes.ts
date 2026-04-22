@@ -10,6 +10,7 @@ import { InvitacionComponent } from './modules/invitacion/invitacion-component/i
 import { RegistroComponent } from './modules/auth/registro-component/registro-component';
 import { PuestoComponent } from './modules/puestos/puesto-component/puesto-component';
 import { EmpresaComponent } from './modules/empresas/empresa-component/empresa-component';
+import { DashbordLayout } from './modules/dashboard/dashbord-layout/dashbord-layout';
 
 export const routes: Routes = [
   { path: 'registrate', component: RegistroComponent },
@@ -23,12 +24,13 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
+      { path: 'layout', component: DashbordLayout },
       { path: 'planillaje', component: PlanillajeComponent },
       { path: 'crear-invitacion', component: InvitacionComponent },
       { path: 'crear-puesto', component: PuestoComponent },
 
       // Si entran a /dashboard a secas, mandarlos a /dashboard/planillaje
-      { path: '', redirectTo: 'planillaje', pathMatch: 'full' },
+      { path: '', redirectTo: 'layout', pathMatch: 'full' },
       // registro de vhiculos
       { path: 'registrar-vehiculo', component: VehiculoComponent },
       // consultar planillaje de un vehiculo
@@ -37,7 +39,7 @@ export const routes: Routes = [
       { path: 'parqueaderos', component: ParqueaderoComponent },
 
       // Si escriben cualquier cosa mal DENTRO del dashboard
-      { path: '**', redirectTo: 'planillaje' }
+      { path: '**', redirectTo: 'layout' }
     ],
   },
 

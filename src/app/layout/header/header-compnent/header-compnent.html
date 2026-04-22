@@ -1,32 +1,33 @@
 <header class="header">
-
-  <!-- IZQUIERDA -->
   <div class="header-left">
+    <!-- Botón de menú - SOLO visible en móvil -->
     <button class="menu-btn" (click)="onToggleMenu()">
       <span class="material-symbols-outlined">menu</span>
     </button>
-
-    <h1>Panel de Control</h1>
+    <h1>Gestión de Flota</h1>
   </div>
 
-  <!-- DERECHA -->
   <div class="header-right">
-
-    <!-- <div class="search-box">
+    <!-- Buscador -->
+    <div class="search-box">
       <span class="material-symbols-outlined">search</span>
-      <input type="text" placeholder="Buscar vehículo..." />
-    </div>-->
-    <!--
-    
-<button class="icon-btn">
-      <span class="material-symbols-outlined">notifications</span>
+      <input 
+        type="text" 
+        placeholder="Buscar..." 
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="onSearch()"
+      />
+    </div>
+
+    <!-- Notificaciones -->
+    <button class="icon-btn" (click)="toggleNotifications()">
+      <span class="material-symbols-outlined">notifications_none</span>
+      <span class="notification-badge" *ngIf="unreadNotifications > 0">{{ unreadNotifications }}</span>
     </button>
 
-    <button class="icon-btn">
-      <span class="material-symbols-outlined">settings</span>
-    </button>-->
-
-
+    <!-- Perfil / Usuario -->
+    <button class="icon-btn avatar-btn" (click)="toggleUserMenu()">
+      <span class="material-symbols-outlined">person</span>
+    </button>
   </div>
-
 </header>

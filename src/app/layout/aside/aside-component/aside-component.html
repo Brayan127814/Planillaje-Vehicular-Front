@@ -7,7 +7,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <!-- CAMBIA SOLO ESTE -->
+
    
       <!-- SOLO ADMIN -->
       <a *ngIf="authService.hasRole('ROLE_ADMIN')" routerLink="crear-invitacion" routerLinkActive="active"
@@ -20,6 +20,12 @@
       <a *ngIf="authService.hasRole('ROLE_ADMIN')" routerLink="crear-puesto" routerLinkActive="active" class="nav-item">
         <span class="material-symbols-outlined">assignment_add</span>
         <span class="nav-label">Registrar puesto</span>
+      </a>
+          <!-- RECORREDOR / ADMIN -->
+      <a *ngIf="authService.hasRole('ROLE_RECORREDOR') || authService.hasRole('ROLE_ADMIN')"
+        routerLink="layout" routerLinkActive="active" class="nav-item">
+        <span class="material-symbols-outlined">assignment_add</span>
+        <span class="nav-label">Dashboard</span>
       </a>
 
       <!-- RECORREDOR / ADMIN -->

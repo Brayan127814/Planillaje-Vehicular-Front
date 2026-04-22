@@ -25,14 +25,30 @@
 .header-left h1 {
   font-size: 18px;
   font-weight: 700;
+  background: linear-gradient(135deg, #00476C 0%, #0582CA 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* MENU BUTTON (mobile) */
+/* MENU BUTTON - OCULTO EN PC, visible en móvil */
 .menu-btn {
-  display: none;
+  display: none; /* 🔥 Oculto en PC */
   background: none;
   border: none;
   cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.menu-btn:hover {
+  background: #f1f5f9;
+}
+
+.menu-btn .material-symbols-outlined {
+  font-size: 24px;
+  color: #00476C;
 }
 
 /* RIGHT */
@@ -62,6 +78,12 @@
   background: #f1f5f9;
   width: 220px;
   outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  background: white;
+  box-shadow: 0 0 0 2px rgba(0, 166, 251, 0.2);
 }
 
 /* ICON BUTTON */
@@ -71,36 +93,94 @@
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-btn:hover {
   background: #f1f5f9;
 }
-/* TABLET */
+
+.icon-btn .material-symbols-outlined {
+  font-size: 22px;
+  color: #5b6e8c;
+}
+
+/* BADGE DE NOTIFICACIONES */
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #ef4444;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 20px;
+}
+
+/* POSICIÓN RELATIVA PARA EL BADGE */
+.icon-btn {
+  position: relative;
+}
+
+/* AVATAR */
+.avatar-btn {
+  background: linear-gradient(135deg, #00A6FB 0%, #0582CA 100%);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-btn .material-symbols-outlined {
+  color: white;
+  font-size: 20px;
+}
+
+/* =========================
+   TABLET (<= 1024px)
+========================= */
 @media (max-width: 1024px) {
   .search-box input {
     width: 150px;
   }
+  
+  .header-left h1 {
+    font-size: 16px;
+  }
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE (<= 768px)
+   🔥 Aquí aparece el botón de menú
+========================= */
 @media (max-width: 768px) {
-
   .menu-btn {
-    display: block; /* 🔥 aparece menú */
+    display: block; /* 🔥 Visible SOLO en móvil */
   }
 
   .search-box {
-    display: none; /* 🔥 ocultas búsqueda */
+    display: none; /* Ocultar búsqueda en móvil */
   }
 
   .header-left h1 {
     font-size: 16px;
   }
-
+  
+  .header {
+    padding: 0 16px;
+    height: 60px;
+  }
 }
 
-/* EXTRA SMALL */
+/* =========================
+   EXTRA SMALL (<= 480px)
+========================= */
 @media (max-width: 480px) {
   .header-right {
     gap: 6px;
@@ -108,5 +188,22 @@
 
   .icon-btn {
     padding: 6px;
+  }
+  
+  .icon-btn .material-symbols-outlined {
+    font-size: 20px;
+  }
+  
+  .avatar-btn {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .avatar-btn .material-symbols-outlined {
+    font-size: 18px;
+  }
+  
+  .header-left h1 {
+    font-size: 14px;
   }
 }
