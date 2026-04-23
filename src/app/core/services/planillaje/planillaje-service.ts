@@ -41,4 +41,21 @@ export class PlanillajeService {
       { params }
     );
   }
+
+  planillajesDelDia(page: number, size: number): Observable<PageResponseP<PlanillajeResponse>> {
+    {
+      const params = new HttpParams()
+        .set('page', page.toString())
+        .set('size', size.toString());
+      return this.http.get<PageResponseP<PlanillajeResponse>>(
+        `${this.Api}/todos`,
+        { params }
+      );
+    }
+  }
+  contarPlnaillajesDelDia(fecha: string) {
+    return this.http.get<number>(`${this.Api}/totalPordia`, {
+      params: { fecha }
+    });
+  }
 }

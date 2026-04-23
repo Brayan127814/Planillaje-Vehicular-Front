@@ -60,6 +60,7 @@
 }
 
 .card {
+ 
   background: white;
   padding: 18px 14px;
   border-radius: 20px;
@@ -83,11 +84,12 @@
 
 .card-info {
   display: flex;
+  
   flex-direction: column;
 }
 
 .card-label {
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: #64748b;
@@ -406,6 +408,8 @@
 .vehicle-info {
   flex: 1;
   display: flex;
+  align-items: center;
+  justify-content: space-around;
   flex-direction: column;
 }
 
