@@ -47,11 +47,19 @@
           <label class="field-label">Placa del Vehículo</label>
           <div class="input-wrapper">
             <span class="material-symbols-outlined input-icon">minor_crash</span>
-            <input type="text" formControlName="placa" placeholder="ABC-1234" class="form-input"/>
+            <input
+              type="text"
+              formControlName="placa"
+              placeholder="ABC123"
+              class="form-input"
+              maxlength="6"
+              minlength="6"
+              (input)="normalizarPlaca()"
+            />
           </div>
 
           <small *ngIf="formPlanillaje.get('placa')?.invalid && formPlanillaje.get('placa')?.touched" class="error-msg">
-            La placa es requerida.
+            {{ obtenerMensajePlaca() }}
           </small>
         </div>
 
@@ -78,11 +86,20 @@
         <div class="field-group">
           <label class="field-label">Evidencia Fotográfica (Máx 6)</label>
 
-          <button type="button" class="btn-secondary"
-            (click)="cameraInput.click()" *ngIf="listaFotos.length < 6">
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="cameraInput.click()"
+            *ngIf="listaFotos.length < 6"
+            [disabled]="isLoadingFoto"
+          >
             <span class="material-symbols-outlined">add_a_photo</span>
-            Tomar Foto
+            {{ isLoadingFoto ? 'Procesando foto...' : 'Tomar Foto' }}
           </button>
+
+          <small *ngIf="isLoadingFoto" class="photo-loading">
+            Optimizando imagen para enviar más rápido.
+          </small>
 
           <input #cameraInput type="file" accept="image/*" capture="environment"
             (change)="onFotoCapturada($event)" hidden>

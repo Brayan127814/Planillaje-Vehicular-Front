@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Auth } from '../../../core/services/auth/auth';
-import { flush } from '@angular/core/testing';
-import { flatMap } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-aside-component',
@@ -15,10 +14,24 @@ import { flatMap } from 'rxjs';
 export class AsideComponent {
   @Input() isOpen = false
 
-  constructor(public authService:  Auth) {}
+  constructor(public authService:  Auth, private router: Router) {}
 
-testNav() {
-  console.log('CLICK TEST');
-}
+  cerrarSesion() {
+    Swal.fire({
+      title: 'Cerrar sesión',
+      text: '¿Seguro que quieres salir?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, salir',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#dc2626'
+    }).then(result => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('RefreshToken');
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 
 }

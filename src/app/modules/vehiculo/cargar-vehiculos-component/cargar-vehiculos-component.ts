@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PlanillajeService } from '../../../core/services/planillaje/planillaje-service';
 import { finalize } from 'rxjs';
-import { TestTools } from 'rxjs/internal/util/Immediate';
 
 @Component({
   selector: 'app-cargar-vehiculos-component',

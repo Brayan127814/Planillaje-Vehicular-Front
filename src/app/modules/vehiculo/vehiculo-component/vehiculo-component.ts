@@ -40,7 +40,7 @@ export class VehiculoComponent implements OnInit {
   ) {
     // Inicializar el formulario con validaciones
     this.formVehiculo = this.fb.group({
-      placa: ["", [Validators.required]],
+      placa: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
       marca: ["", [Validators.required]],
       parqueaderoId: [null, [Validators.required]]
     });
@@ -72,6 +72,12 @@ export class VehiculoComponent implements OnInit {
     }
   }
 
+  normalizarPlaca() {
+    const control = this.formVehiculo.get('placa');
+    const placa = control?.value || '';
+    control?.setValue(placa.toUpperCase().slice(0, 6), { emitEvent: false });
+  }
+
   // Función para enviar el formulario y registrar un vehículo
   agregarCarro() {
     // Limpiar mensajes previos
@@ -80,7 +86,7 @@ export class VehiculoComponent implements OnInit {
 
     // Validar formulario antes de enviar
     if (this.formVehiculo.invalid) {
-      this.errorMessage = 'Complete todos los campos obligatorios.';
+      this.errorMessage = this.obtenerMensajeFormulario();
       this.formVehiculo.markAllAsTouched(); // marcar todos los campos como tocados para mostrar errores
       this.cdr.detectChanges();             // forzar actualización de la UI
       return;
@@ -122,5 +128,23 @@ export class VehiculoComponent implements OnInit {
         this.cdr.detectChanges();    // forzar actualización de la UI
       }
     });
+  }
+
+  obtenerMensajePlaca() {
+    const placa = this.formVehiculo.get('placa');
+
+    if (placa?.errors?.['required']) return 'La placa es requerida.';
+    if (placa?.errors?.['minlength'] || placa?.errors?.['maxlength']) {
+      return 'La placa debe tener exactamente 6 caracteres.';
+    }
+
+    return '';
+  }
+
+  private obtenerMensajeFormulario() {
+    if (this.formVehiculo.get('placa')?.invalid) return this.obtenerMensajePlaca();
+    if (this.formVehiculo.get('marca')?.invalid) return 'La marca es requerida.';
+    if (this.formVehiculo.get('parqueaderoId')?.invalid) return 'Debe seleccionar un parqueadero.';
+    return 'Complete todos los campos obligatorios.';
   }
 }

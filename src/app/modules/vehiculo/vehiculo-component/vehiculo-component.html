@@ -36,7 +36,16 @@
             <div class="row">
                 <div class="field">
                     <label>PLACA</label>
-                    <input formControlName="placa" placeholder="ABC-123" />
+                    <input
+                        formControlName="placa"
+                        placeholder="ABC123"
+                        maxlength="6"
+                        minlength="6"
+                        (input)="normalizarPlaca()"
+                    />
+                    <small *ngIf="formVehiculo.get('placa')?.invalid && formVehiculo.get('placa')?.touched" class="field-error">
+                        {{ obtenerMensajePlaca() }}
+                    </small>
                 </div>
 
                 <div class="field">

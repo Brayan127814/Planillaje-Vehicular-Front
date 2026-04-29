@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../../../core/services/auth/auth';
-import { form } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthLogin } from '../../../core/services/auth-login';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-registro-component',
@@ -22,7 +23,7 @@ export class RegistroComponent implements OnInit{
   tokenInvalido: boolean = false  // 🔥 Nueva propiedad para marcar token inválido
 
   constructor(private authService: Auth, private fb: FormBuilder, private route: ActivatedRoute,
-     private AuthLogin: AuthLogin , private router : Router
+     private authLogin: AuthLogin , private router : Router
   ) {
     this.formsRegistro = fb.nonNullable.group({
       nombre: ["", [Validators.required]],
@@ -51,6 +52,7 @@ export class RegistroComponent implements OnInit{
     // Si el token ya fue marcado como inválido, no continuar
     if (this.tokenInvalido) {
       this.errorMensaje = "Este enlace de invitación ya no es válido o ha sido usado."
+      this.mostrarAlertaError(this.errorMensaje)
       return
     }
 
@@ -75,11 +77,11 @@ export class RegistroComponent implements OnInit{
 
     this.authService.registrarUsuario(data).subscribe({
       next: res => {
-        this.mensajeExit = "Usuario Registrado con exito"
+        this.mensajeExit = "Usuario registrado con éxito"
         this.errorMensaje = ''
 
         // 🔥 LOGIN AUTOMÁTICO
-        this.AuthLogin.login({
+        this.authLogin.login({
           username: formValue.username,
           password: formValue.password
         }).subscribe({
@@ -90,48 +92,28 @@ export class RegistroComponent implements OnInit{
             console.log("AUTO LOGIN OK")
             console.log("Token guardado:", localStorage.getItem("accessToken"))
 
-            // 🚀 REDIRECCIÓN
-            this.router.navigate(["/dashboard"])
-            
             this.isLoading = false
+
+            Swal.fire({
+              title: 'Registro exitoso',
+              text: 'Tu usuario fue creado correctamente.',
+              icon: 'success',
+              confirmButtonText: 'Continuar'
+            }).then(() => {
+              this.router.navigate(["/dashboard"])
+            })
           },
           error: err => {
             console.error(err)
             this.errorMensaje = "Usuario creado pero error al iniciar sesión"
+            this.mostrarAlertaError(this.errorMensaje)
             this.isLoading = false
           }
         })
       },
       error: e => {
         console.error(e)
-        
-        // 🔥 Manejo específico para errores del token
-        if (e.error && e.error.message) {
-          const errorMessage = e.error.message.toLowerCase()
-          
-          if (errorMessage.includes('token ya fue usado') || errorMessage.includes('token already used')) {
-            this.errorMensaje = "❌ Este enlace de invitación ya ha sido utilizado. No puedes registrarte nuevamente con el mismo enlace."
-            this.tokenInvalido = true
-            // Deshabilitar el formulario completo
-            this.formsRegistro.disable()
-          } 
-          else if (errorMessage.includes('token inválido') || errorMessage.includes('token invalid')) {
-            this.errorMensaje = "❌ El enlace de invitación es inválido. Por favor, contacta al administrador."
-            this.tokenInvalido = true
-            this.formsRegistro.disable()
-          }
-          else if (errorMessage.includes('username') || errorMessage.includes('ya existe')) {
-            this.errorMensaje = "⚠️ Este nombre de usuario ya está en uso. Por favor, elige otro."
-            // No deshabilitamos el formulario, solo el campo username
-            this.formsRegistro.get('username')?.setErrors({ taken: true })
-          }
-          else {
-            this.errorMensaje = `Error al registrar usuario: ${e.error.message}`
-          }
-        } else {
-          this.errorMensaje = "Error al registrar usuario. Por favor, intenta de nuevo."
-        }
-        
+        this.manejarErrorRegistro(e)
         this.mensajeExit = ''
         this.isLoading = false
       }
@@ -146,5 +128,47 @@ export class RegistroComponent implements OnInit{
     this.mensajeExit = ''
     this.tokenInvalido = false
     this.isLoading = false
+  }
+
+  private manejarErrorRegistro(e: any): void {
+    const mensajeBack = e.error?.message?.toLowerCase() || ''
+
+    if (mensajeBack.includes('token ya fue usado') || mensajeBack.includes('token already used')) {
+      this.errorMensaje = "Este enlace de invitación ya ha sido utilizado. No puedes registrarte nuevamente con el mismo enlace."
+      this.tokenInvalido = true
+      this.formsRegistro.disable()
+    }
+    else if (mensajeBack.includes('token inválido') || mensajeBack.includes('token invalid')) {
+      this.errorMensaje = "El enlace de invitación es inválido. Por favor, contacta al administrador."
+      this.tokenInvalido = true
+      this.formsRegistro.disable()
+    }
+    else if (mensajeBack.includes('username') || mensajeBack.includes('ya existe')) {
+      this.errorMensaje = "Este nombre de usuario ya está en uso. Por favor, elige otro."
+      this.formsRegistro.get('username')?.setErrors({ taken: true })
+    }
+    else if (e.error?.message) {
+      this.errorMensaje = e.error.message
+    }
+    else if (typeof e.error === 'string') {
+      this.errorMensaje = e.error
+    }
+    else if (e.status === 0) {
+      this.errorMensaje = "No se pudo conectar con el servidor."
+    }
+    else {
+      this.errorMensaje = "Error al registrar usuario. Por favor, intenta de nuevo."
+    }
+
+    this.mostrarAlertaError(this.errorMensaje)
+  }
+
+  private mostrarAlertaError(mensaje: string): void {
+    Swal.fire({
+      title: 'Error de registro',
+      text: mensaje,
+      icon: 'error',
+      confirmButtonText: 'Aceptar'
+    })
   }
 }

@@ -23,10 +23,10 @@
         Enter your credentials to initialize your workspace.
       </p>
 
-      <!-- ⚠️ Alerta de token inválido -->
+      <!-- Alerta de token inválido -->
       <div *ngIf="tokenInvalido" class="alert alert-error">
-        <strong>🔒 Enlace Inválido</strong>
-        <p>Este enlace de invitación ya no está disponible. Por favor, solicita un nuevo enlace de registro.</p>
+        <strong>Enlace inválido</strong>
+        <p>{{ errorMensaje || 'Este enlace de invitación ya no está disponible. Por favor, solicita un nuevo enlace de registro.' }}</p>
         <button (click)="resetFormulario()" class="btn-reset">Solicitar nuevo enlace</button>
       </div>
 
@@ -42,7 +42,7 @@
         <input type="text" placeholder="@j.doe_arch" formControlName="username" />
         <div *ngIf="formsRegistro.get('username')?.invalid && formsRegistro.get('username')?.touched" class="field-error">
           <span *ngIf="formsRegistro.get('username')?.errors?.['required']">El username es requerido</span>
-          <span *ngIf="formsRegistro.get('username')?.errors?.['taken']">⚠️ Este username ya está en uso</span>
+          <span *ngIf="formsRegistro.get('username')?.errors?.['taken']">Este username ya está en uso</span>
         </div>
 
         <label>SECURITY PASSWORD</label>
@@ -52,7 +52,7 @@
         </div>
 
         <button type="submit" [disabled]="isLoading || formsRegistro.disabled">
-          <span *ngIf="!isLoading">Continue Setup →</span>
+          <span *ngIf="!isLoading">Continue Setup -></span>
           <span *ngIf="isLoading" class="loading-spinner">
             <span class="spinner"></span> Processing...
           </span>
@@ -65,13 +65,8 @@
 
       <!-- MENSAJES -->
       <div *ngIf="mensajeExit" class="success">
-        <strong>✅ Éxito!</strong>
+        <strong>Éxito</strong>
         <p>{{ mensajeExit }}</p>
-      </div>
-      
-      <div *ngIf="errorMensaje && !tokenInvalido" class="error">
-        <strong>❌ Error</strong>
-        <p>{{ errorMensaje }}</p>
       </div>
 
     </div>

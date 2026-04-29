@@ -1,27 +1,28 @@
 /* CONTENEDOR */
+.contenedor-doble,
+.contenedor-doble * {
+  box-sizing: border-box;
+}
+
 .contenedor-doble {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 20px;
-
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
   width: 100%;
-  max-width: 1000px;
-  /* 🔥 evita que se estire demasiado */
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px;
+  align-items: start;
 }
 
 /* CARD */
-
 .card {
+  width: 100%;
+  min-width: 0;
   background: white;
   border-radius: 14px;
-  padding: 20px;
-
-  width: 100%;
-  max-width: 480px;
-  /* 🔥 evita formularios gigantes */
-
+  padding: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-
   transition: transform 0.2s ease;
 }
 
@@ -29,16 +30,16 @@
   transform: translateY(-2px);
 }
 
-
 /* HEADER */
 .panel-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .icon {
+  flex: 0 0 auto;
   background: #005ac2;
   color: white;
   padding: 10px;
@@ -47,60 +48,64 @@
 
 .panel-header h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .panel-header p {
-  margin: 0;
-  font-size: 12px;
+  margin: 2px 0 0;
+  font-size: 13px;
   color: #6b7280;
 }
 
 /* CAMPOS */
 .campo {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .campo label {
-  font-size: 12px;
-  font-weight: 600;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* INPUTS */
 input,
 select {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
   background: #eef2f6;
   font-size: 14px;
   outline: none;
 }
 
+input:focus,
+select:focus {
+  border-color: #4d8eff;
+  background: #f8fbff;
+}
+
 /* BOTONES */
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border-radius: 10px;
   border: none;
-  background: linear-gradient(135deg, #005ac2, #4d8eff);
   color: white;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
 
+.btn-primary {
+  background: linear-gradient(135deg, #005ac2, #4d8eff);
+}
+
 .btn-secondary {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
   background: #005ac2;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
 }
 
 button:disabled {
@@ -112,9 +117,9 @@ button:disabled {
 .alert {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px 12px;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   font-size: 13px;
 }
 
@@ -128,9 +133,21 @@ button:disabled {
   color: #b91c1c;
 }
 
-/* 🔥 RESPONSIVE */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .contenedor-doble {
     grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenedor-doble {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 18px;
   }
 }

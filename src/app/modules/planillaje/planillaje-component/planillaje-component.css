@@ -278,8 +278,28 @@
   box-shadow: 0 6px 12px rgba(0, 166, 251, 0.2);
 }
 
+.btn-secondary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary:disabled:hover {
+  background: #f8fcff;
+  color: #0582CA;
+  border-color: #00A6FB;
+}
+
 .btn-secondary .material-symbols-outlined {
   font-size: 18px;
+}
+
+.photo-loading {
+  display: block;
+  margin: -4px 0 12px;
+  color: #5b6e8c;
+  font-size: 0.72rem;
 }
 
 /* GRID FOTOS */
