@@ -133,7 +133,8 @@
                 <td>{{ p.nombreUsuario }}</td>
                 <td>
                   <div *ngFor="let foto of p.fotosBase64" class="foto">
-                    <img [src]="foto" alt="Foto" />
+                    <img [src]="foto.startsWith('data:') ? foto : 'data:image/jpeg;base64,' + foto" alt="Foto" />
+
                   </div>
                   <div *ngIf="!p.fotosBase64 || p.fotosBase64.length === 0">
                     No hay fotos disponibles
