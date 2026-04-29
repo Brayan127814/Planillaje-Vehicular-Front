@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 import { PuestoServices } from '../../../core/services/puestos/puesto-services';
 import { ParqueaderoService } from '../../../core/services/parqueaderos/parqueadero-service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-puesto-component',
@@ -71,6 +72,14 @@ export class PuestoComponent implements OnInit {
         this.formsPuestos.reset()
 
         this.limpiarMensajeDespuesDeTiempo('mensajeExit')
+
+        Swal.fire({
+          title: '¿Desea generar parqueaderos para este puesto?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Sí, generar',
+          cancelButtonText: 'No, gracias'
+        })
       },
       error: (err) => {
         const mensajeError = this.extraerMensajeError(err)
