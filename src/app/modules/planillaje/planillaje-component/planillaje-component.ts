@@ -186,7 +186,7 @@ export class PlanillajeComponent {
         this.mensaje = mensajeBackend;
         this.tipoMensaje = 'error';
 
-        // 🔥 ESTA ES LA CLAVE
+
         this.cdr.markForCheck();
       }
     })

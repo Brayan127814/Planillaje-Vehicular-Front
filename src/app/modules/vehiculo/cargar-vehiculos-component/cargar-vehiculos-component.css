@@ -152,6 +152,14 @@
   min-width: 180px;
 }
 
+.history-search-card input {
+  margin-bottom: 14px;
+}
+
+.history-search-card .btn {
+  min-width: 126px;
+}
+
 /* INPUTS */
 input {
   width: 100%;

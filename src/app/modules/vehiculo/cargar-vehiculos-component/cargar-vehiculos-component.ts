@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PlanillajeService } from '../../../core/services/planillaje/planillaje-service';
 import { finalize } from 'rxjs';
+import Swal  from 'sweetalert2';
 
 @Component({
   selector: 'app-cargar-vehiculos-component',
@@ -90,6 +91,13 @@ export class CargarVehiculosComponent {
         if (res.content.length == 0) {
           this.mensaje = "No se encontraron resultados"
         }
+
+        Swal.fire({
+          title: 'Consulta de planillaje',
+          text: this.mensaje || `Se encontraron ${res.content.length} planillajes para la placa ${this.placaPlanillaje.toUpperCase()}.`,
+          icon: res.content.length > 0 ? 'success' : 'info',
+          confirmButtonText: 'Aceptar'
+        })
 
         this.cdr.markForCheck()
       }, error: () => {

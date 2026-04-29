@@ -71,7 +71,7 @@
     <div class="right">
 
       <!-- BUSCAR PLANILLAJE -->
-      <div class="card">
+      <div class="card history-search-card">
         <h3>Historial de Planillaje</h3>
 
         <input 
@@ -96,9 +96,11 @@
            
                 <th>Placa</th>
                 <th>Puesto</th>
-                
-                <th>Estado</th>
+                <th>Novedad</th>
+                <th>Detalles</th>
                 <th>Hora</th>
+                <th>Responsable</th>
+                <th>Fotos</th>
               </tr>
             </thead>
 
@@ -123,7 +125,20 @@
                   </span>
                 </td>
 
+                <td>{{ p.detalles }}
+                    
+                </td>
+
                 <td>{{ p.horaInicio }}</td>
+                <td>{{ p.nombreUsuario }}</td>
+                <td>
+                  <div *ngFor="let foto of p.fotosBase64" class="foto">
+                    <img [src]="foto" alt="Foto" />
+                  </div>
+                  <div *ngIf="!p.fotosBase64 || p.fotosBase64.length === 0">
+                    No hay fotos disponibles
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -1,4 +1,9 @@
 /* BASE */
+.planilla-page,
+.planilla-page * {
+  box-sizing: border-box;
+}
+
 .planilla-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f0f4f8 0%, #e8edf3 100%);
@@ -219,6 +224,8 @@
 /* TEXTAREA */
 .form-textarea {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   background: #f8fafc;
   border: 1.5px solid #e2e8f0;
   padding: 14px 16px;
