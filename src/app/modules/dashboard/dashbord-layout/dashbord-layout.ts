@@ -30,15 +30,6 @@ export class DashbordLayout implements OnInit, OnDestroy {
 
   // ==================== VARIABLES ====================
 
-  // Estadísticas
-  estadisticas: Estadisticas = {
-    activos: 0,
-    planillados: 0,
-    totalRegistrados: 0,
-    parqueaderos: 0,
-    activosHoy: 142,
-    planillajesHoy: 37
-  };
 
   // Búsqueda
   searchText: string = '';

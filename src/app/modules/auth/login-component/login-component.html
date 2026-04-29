@@ -43,17 +43,14 @@
             placeholder="••••••••"
             [class.invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
           >
-          <span class="material-symbols-outlined eye">visibility</span>
+        
         </div>
 
         <div class="forgot">
           <a href="#">¿Olvidaste tu contraseña?</a>
         </div>
 
-        <div class="remember">
-          <input type="checkbox">
-          <label>Mantener sesión iniciada</label>
-        </div>
+        
 
         <button type="submit" [disabled]="loginForm.pending">
           Iniciar sesión →

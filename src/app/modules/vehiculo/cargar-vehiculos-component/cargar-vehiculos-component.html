@@ -14,12 +14,7 @@
 
       <!-- BUSCADOR -->
       <div class="card search-card">
-        <input 
-          type="text"
-          [(ngModel)]="placa"
-          (keyup.enter)="buscarVehiculo()"
-          placeholder="Buscar por placa..."
-        />
+        <input type="text" minlength="6" maxlength="6" [(ngModel)]="placa" (keyup.enter)="buscarVehiculo()" placeholder="Buscar por placa..." />
 
         <button class="btn primary" (click)="buscarVehiculo()">Buscar</button>
         <button class="btn" (click)="cargar()">Ver todos</button>
@@ -40,11 +35,8 @@
             </thead>
 
             <tbody>
-              <tr 
-                *ngFor="let v of vehiculos"
-                (click)="placaPlanillaje = v.placa; consultarPlanillaje()"
-                [class.active]="placaPlanillaje === v.placa"
-              >
+              <tr *ngFor="let v of vehiculos" (click)="placaPlanillaje = v.placa; consultarPlanillaje()"
+                [class.active]="placaPlanillaje === v.placa">
                 <td><strong>{{ v.placa }}</strong></td>
                 <td>{{ v.marca }}</td>
                 <td>{{ v.numeroDeParqueadero }}</td>
@@ -74,12 +66,8 @@
       <div class="card history-search-card">
         <h3>Historial de Planillaje</h3>
 
-        <input 
-          type="text"
-          [(ngModel)]="placaPlanillaje"
-          (keyup.enter)="consultarPlanillaje()"
-          placeholder="Ingresar placa..."
-        />
+        <input type="text" [(ngModel)]="placaPlanillaje"  minlength="6" maxlength="6" (keyup.enter)="consultarPlanillaje()"
+          placeholder="Ingresar placa..." />
 
         <button class="btn primary" (click)="consultarPlanillaje()">Consultar</button>
       </div>
@@ -88,12 +76,22 @@
       <div class="card">
         <h3>Resultados</h3>
 
+        <!-- Filtro local: solo filtra los planillajes que ya están cargados en esta tabla -->
+        <div class="date-filter">
+          <label>Buscar por fecha</label>
+          <!-- El selector de calendario entrega la fecha en formato YYYY-MM-DD -->
+          <input type="date" [(ngModel)]="fechaFiltro" />
+          <button type="button" class="btn" *ngIf="fechaFiltro" (click)="fechaFiltro = ''">
+            Limpiar
+          </button>
+        </div>
+
         <!-- 🔥 SCROLL HORIZONTAL -->
         <div class="table-container scroll-x">
           <table *ngIf="planillajes.length > 0">
             <thead>
               <tr>
-           
+
                 <th>Placa</th>
                 <th>Puesto</th>
                 <th>Novedad</th>
@@ -105,41 +103,53 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let p of planillajes; trackBy: trackById">
-               
+              <!-- La tabla pinta el arreglo ya filtrado por fecha -->
+              <tr *ngFor="let p of filtrarPlanillajesPorFecha(); trackBy: trackById">
+
                 <td><strong>{{ p.placa }}</strong></td>
                 <td>{{ p.nombrePuesto }}</td>
-              
+
 
                 <!-- BADGE -->
                 <td>
-                  <span 
-                    class="badge-status"
-                    [ngClass]="{
+                  <span class="badge-status" [ngClass]="{
                       'badge-success': p.novedadesPlanillaje === 'OK',
                       'badge-warning': p.novedadesPlanillaje === 'PENDIENTE',
                       'badge-danger': p.novedadesPlanillaje === 'DAÑO'
-                    }"
-                  >
+                    }">
                     {{ p.novedadesPlanillaje }}
                   </span>
                 </td>
 
                 <td>{{ p.detalles }}
-                    
+
                 </td>
 
-                <td>{{ p.horaInicio }}</td>
-                <td>{{ p.nombreUsuario }}</td>
                 <td>
-                  <div *ngFor="let foto of p.fotosBase64" class="foto">
-                    <img [src]="foto.startsWith('data:') ? foto : 'data:image/jpeg;base64,' + foto" alt="Foto" />
-
-                  </div>
-                  <div *ngIf="!p.fotosBase64 || p.fotosBase64.length === 0">
-                    No hay fotos disponibles
-                  </div>
+                  <span class="time-badge">{{ formatearHora(p.horaInicio) }}</span>
                 </td>
+                <td>{{ p.nombreUsuario }}</td>
+                <td class="photos-cell">
+                  <ng-container *ngIf="p.fotosBase64?.length; else sinFotos">
+                    <div class="photo-gallery" [attr.aria-label]="p.fotosBase64.length + ' fotos del planillaje'">
+                      <button
+                        *ngFor="let foto of p.fotosBase64; let i = index"
+                        type="button"
+                        class="photo-thumb"
+                        [title]="'Foto ' + (i + 1)"
+                      >
+                        <img [src]="foto.startsWith('data:') ? foto : 'data:image/jpeg;base64,' + foto" alt="Foto del planillaje" />
+                      </button>
+                    </div>
+
+                    <span class="photo-count">{{ p.fotosBase64.length }} foto{{ p.fotosBase64.length === 1 ? '' : 's' }}</span>
+                  </ng-container>
+
+                  <ng-template #sinFotos>
+                    <span class="no-photos">Sin fotos</span>
+                  </ng-template>
+                </td>
+
               </tr>
             </tbody>
           </table>
