@@ -89,7 +89,9 @@ export class PlanillajeComponent {
         const img = new Image()
 
         img.onload = () => {
-          const maxWidth = 1024
+          // En produccion las fotos de celular pueden ser muy pesadas para JSON/BD.
+          // Bajamos resolucion y calidad para que el backend guarde la imagen sin truncarla.
+          const maxWidth = 800
           const scale = Math.min(1, maxWidth / img.width)
           const canvas = document.createElement('canvas')
 
@@ -103,7 +105,7 @@ export class PlanillajeComponent {
           }
 
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-          resolve(canvas.toDataURL('image/jpeg', 0.7))
+          resolve(canvas.toDataURL('image/jpeg', 0.55))
         }
 
         img.onerror = () => reject(new Error('Imagen inválida.'))

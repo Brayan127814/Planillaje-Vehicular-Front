@@ -173,6 +173,20 @@ export class CargarVehiculosComponent {
     return valor
   }
 
+  // Normaliza la foto que llega del backend.
+  // Si ya viene como data URL, se usa igual; si viene Base64 puro, se le agrega el prefijo.
+  obtenerSrcFoto(foto: string): string {
+    if (!foto) return ''
+
+    const fotoLimpia = foto.trim()
+
+    if (fotoLimpia.startsWith('data:image')) {
+      return fotoLimpia
+    }
+
+    return `data:image/jpeg;base64,${fotoLimpia}`
+  }
+
   // Filtra solo los planillajes que ya están cargados en la tabla.
   // Como el backend responde "2026-04-28T22:45:14.2534914",
   // tomamos los primeros 10 caracteres para comparar solo "YYYY-MM-DD".

@@ -138,7 +138,7 @@
                         class="photo-thumb"
                         [title]="'Foto ' + (i + 1)"
                       >
-                        <img [src]="foto.startsWith('data:') ? foto : 'data:image/jpeg;base64,' + foto" alt="Foto del planillaje" />
+                        <img [src]="obtenerSrcFoto(foto)" alt="Foto del planillaje" />
                       </button>
                     </div>
 
